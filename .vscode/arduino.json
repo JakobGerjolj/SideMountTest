@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "SideTestBetter.ino",
+    "port": "/dev/ttyACM0"
+}
