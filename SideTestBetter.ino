@@ -1,6 +1,6 @@
-#include "lib/AnalogPins.h"
-#include "lib/DigitalPins.h"
-#include "lib/CAN.h"
+#include "AnalogPins.h"
+#include "DigitalPins.h"
+#include "CAN.h"
 
 CAN myCAN;
 
