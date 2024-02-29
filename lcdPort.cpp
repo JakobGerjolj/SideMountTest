@@ -1,8 +1,9 @@
 #include "lcdPort.h"
+#include "Arduino.h"
 
 lcdPort::lcdPort() : lcd(0x27,20,4)
 {
-
+CurrentScreen=NOSCREEN;
 }
 
 void lcdPort::lcdInit()
@@ -14,11 +15,29 @@ void lcdPort::lcdInit()
 
 void lcdPort::WriteStatus(Cscreen x)
 {
-    if(x==AOKDOK){
+    if(x==AOKDOK && CurrentScreen==NOSCREEN){
         lcd.clear();
+        
         bothLines("ANALOG OK", "DIGITAL OK");
+        CurrentScreen=AOKDOK;
+        timer1=millis();
+    }
+    // else if(millis() >= (timer1+2000) && CurrentScreen==AOKDOK){
 
-    }else bothLines("NOO", "NOO");
+
+    // }
+
+}
+
+void lcdPort::lcdRefresher()
+{
+    if(millis() >= timer1 + 2000 && CurrentScreen != NOSCREEN){
+        lcd.clear();
+        int tempEnu=CurrentScreen;
+        tempEnu++;
+        CurrentScreen=static_cast<Cscreen>(tempEnu);
+
+    }
 
 }
 

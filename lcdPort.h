@@ -8,13 +8,17 @@ public:
     lcdPort();
     void lcdInit();
     void WriteStatus(Cscreen x);
+    void lcdRefresher();
+
     
 
 private:
+    unsigned long timer;
     LiquidCrystal_I2C lcd;
     Dstate CurrentDState;
     Cscreen CurrentScreen;
     void showData(const char* data) override;
-    void bothLines(String  x, String y);
+     void bothLines(String  x, String y);
+    
 
 };
