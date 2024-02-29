@@ -60,13 +60,33 @@ bool CAN::ReadCAN()
 
 }
 
-uint16_t CAN::VrniTemperaturo1()
+uint16_t CAN::ReturnTemperaturo1()
 {
     
     return T1;
 }
 
-uint16_t CAN::VrniTemperaturo2()
+uint16_t CAN::ReturnTemperaturo2()
 {
     return T2;
+}
+
+uint16_t CAN::ReturnHAL()
+{
+    return HAL;
+}
+
+bool CAN::ReturnZERO()
+{
+    return ZERO;
+}
+
+char CAN::ReturnLastButtonPressed()
+{
+    return LastButtonPressed;
+}
+
+bool CAN::ReturnNFC()
+{
+    return NFC;
 }
