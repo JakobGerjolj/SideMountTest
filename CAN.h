@@ -4,6 +4,7 @@
 class CAN{
 public:
     CAN();
+    void CANInit();
     void ProccessCAN();
     uint16_t ReturnTemp1();
     uint16_t ReturnTemp2();

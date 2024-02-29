@@ -8,10 +8,15 @@ T2=0;
 HAL=0;
 ZERO=false;
 LastButtonPressed='X';
-mcp.reset();
-mcp.setBitrate(CAN_250KBPS, MCP_8MHZ);
-mcp.setNormalMode();
 
+
+}
+
+void CAN::CANInit()
+{
+    mcp.reset();
+    mcp.setBitrate(CAN_250KBPS, MCP_8MHZ);
+    mcp.setNormalMode();
 }
 
 void CAN::ProccessCAN()

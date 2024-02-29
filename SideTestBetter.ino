@@ -2,9 +2,10 @@
 #include "DigitalPins.h"
 #include "CAN.h"
 
-CAN myCAN;
+ CAN myCAN;
 
 void setup() {
+  myCAN.CANInit();
   Serial.begin(115200);
 }
 
@@ -12,20 +13,23 @@ void setup() {
 
 
 void loop() {
+//Serial.print("MONALISA");
 myCAN.ProccessCAN();
+if(millis()%500==0){
 Serial.println();
 Serial.print("Temperatura 1: ");
-Serial.print(myCAN.ReturnTemp1());
-Serial.println("Temperatura 2: ");
-Serial.print(myCAN.ReturnTemp2());
+Serial.println(myCAN.ReturnTemp1());
+Serial.print("Temperatura 2: ");
+Serial.println(myCAN.ReturnTemp2());
 Serial.println("HAL: ");
-Serial.print(myCAN.ReturnHAL());
+Serial.println(myCAN.ReturnHAL());
 Serial.println("ZERO: ");
-Serial.print(myCAN.ReturnZERO());
+Serial.println(myCAN.ReturnZERO());
 Serial.println("LAST BUTTON PRESSED: ");
-Serial.print(myCAN.ReturnLastButtonPressed());
+Serial.println(myCAN.ReturnLastButtonPressed());
 Serial.println("VRNI NFC: ");
-Serial.print(myCAN.ReturnNFC());
+Serial.println(myCAN.ReturnNFC());
+//delay(2000);
+}
 
-delay(500);
 }
