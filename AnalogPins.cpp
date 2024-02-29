@@ -36,3 +36,22 @@ float AnalogPins::GetValueFromPin(int pin)
 
 }
 
+int AnalogPins::Get3_3PIN()
+{
+    return Pin3_3;
+}
+
+int AnalogPins::Get5PIN()
+{
+    return Pin5;
+}
+
+int AnalogPins::Get12PIN()
+{
+    return Pin12;
+}
+
+int AnalogPins::Get44PIN()
+{
+    return Pin4;
+}

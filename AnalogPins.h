@@ -6,7 +6,11 @@ public:
     static bool is5OK();
     static bool is12OK();
     static bool is44OK();
-    float GetValueFromPin(int pin);
+    static float GetValueFromPin(int pin);
+    static int Get3_3PIN();
+    static int Get5PIN();
+    static int Get12PIN();
+    static int Get44PIN();
 
 private:
     static const uint16_t Val3_3 = 682;   
