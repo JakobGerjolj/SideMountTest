@@ -5,8 +5,8 @@ class CAN{
 public:
     CAN();
     void ProccessCAN();
-    uint16_t ReturnTemperaturo1();
-    uint16_t ReturnTemperaturo2();
+    uint16_t ReturnTemp1();
+    uint16_t ReturnTemp2();
     uint16_t ReturnHAL();
     bool ReturnZERO();
     char ReturnLastButtonPressed();

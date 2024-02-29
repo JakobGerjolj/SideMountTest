@@ -60,13 +60,13 @@ bool CAN::ReadCAN()
 
 }
 
-uint16_t CAN::ReturnTemperaturo1()
+uint16_t CAN::ReturnTemp1()
 {
     
     return T1;
 }
 
-uint16_t CAN::ReturnTemperaturo2()
+uint16_t CAN::ReturnTemp2()
 {
     return T2;
 }
