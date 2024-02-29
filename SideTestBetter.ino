@@ -1,7 +1,6 @@
-#include "AnalogPins.h"
-#include "DigitalPins.h"
-
-bool s1=false;
+#include "lib/AnalogPins.h"
+#include "lib/DigitalPins.h"
+#include "lib/CAN.h"
 
 
 void setup() {
@@ -13,15 +12,7 @@ void setup() {
 
 void loop() {
 
-  Serial.println("-----------------------------------------------");
-  Serial.print("DIGITAL 33 value: ");
-  Serial.print(DigitalPins::is3_3OK());
-  Serial.println();
 
-  Serial.print("DIGITAL 4 value: ");
-  Serial.print(DigitalPins::is4OK());
-  Serial.println();
-  Serial.println("-----------------------------------------------");
   delay(1000);
 
 }
