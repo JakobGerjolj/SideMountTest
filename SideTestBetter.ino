@@ -2,6 +2,7 @@
 #include "lib/DigitalPins.h"
 #include "lib/CAN.h"
 
+CAN myCAN;
 
 void setup() {
   Serial.begin(115200);
@@ -11,6 +12,8 @@ void setup() {
 
 
 void loop() {
+
+
 
 
   delay(1000);

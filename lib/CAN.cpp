@@ -7,7 +7,7 @@ T1=0;
 T2=0;
 HAL=0;
 ZERO=false;
-BUTTON='X';
+LastButtonPressed='X';
 mcp.reset();
 mcp.setBitrate(CAN_250KBPS, MCP_8MHZ);
 mcp.setNormalMode();
