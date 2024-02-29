@@ -15,8 +15,10 @@ void setup() {
 
 
 void loop() {
-myLCD.showData("HAHAHAHA");
+if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
+  myLCD.WriteStatus(AOKDOK);
 
+}
 
 delay(1000);
 }

@@ -17,3 +17,10 @@ bool DigitalPins::is4OK()
 
     }else return false;
 }
+
+bool DigitalPins::isAllPinsOK()
+{
+    if(DigitalPins::is3_3OK && DigitalPins::is4OK){
+    return true;
+    }else return false;
+}

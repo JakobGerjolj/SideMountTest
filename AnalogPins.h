@@ -12,6 +12,7 @@ public:
     static int Get5PIN();
     static int Get12PIN();
     static int Get44PIN();
+    static bool isAllPinsOK();
 
 private:
     static const uint16_t Val3_3 = 682;   

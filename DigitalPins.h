@@ -5,6 +5,7 @@ class DigitalPins{
 public:
     static bool is3_3OK();
     static bool is4OK();
+    static bool isAllPinsOK();
 
 private:
     static const int Pin3_3=7;

@@ -12,10 +12,30 @@ void lcdPort::lcdInit()
     lcd.command(0xA6);
 }
 
+void lcdPort::WriteStatus(Cscreen x)
+{
+    if(x==AOKDOK){
+        bothLines("ANALOG OK", "DIGITAL OK");
+
+    }
+
+}
+
 void lcdPort::showData(const char *data)
 {
     lcd.clear();
     lcd.setCursor(0,0);
     lcd.print(data);
+
+}
+
+void lcdPort::bothLines(String x, String y)
+{
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print(x);
+    lcd.setCursor(0,1);
+    lcd.print(y);
+
 
 }
