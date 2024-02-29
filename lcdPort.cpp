@@ -15,9 +15,10 @@ void lcdPort::lcdInit()
 void lcdPort::WriteStatus(Cscreen x)
 {
     if(x==AOKDOK){
+        lcd.clear();
         bothLines("ANALOG OK", "DIGITAL OK");
 
-    }
+    }else bothLines("NOO", "NOO");
 
 }
 

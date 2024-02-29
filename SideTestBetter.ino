@@ -15,12 +15,12 @@ void setup() {
 
 
 void loop() {
-if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
+if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK() && millis()%500==0){
   myLCD.WriteStatus(AOKDOK);
 
-}
+}else Serial.println("NOT GOOD");
 
-delay(1000);
+
 }
 
 
