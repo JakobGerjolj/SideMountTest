@@ -1,3 +1,4 @@
+#pragma once
 #include "DigitalPins.h"
 
 bool DigitalPins::is3_3OK()
