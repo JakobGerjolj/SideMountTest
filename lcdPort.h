@@ -2,6 +2,8 @@
 #include "DisplayState.h"
 #include <LiquidCrystal_I2C.h>
 #include <string.h>
+#include <Arduino.h>  // for sprintf
+
 
 class lcdPort : public DisplayPort{
 public:

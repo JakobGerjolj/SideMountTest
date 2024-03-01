@@ -12,7 +12,7 @@ enum Dstate{
        OPEN
         
 
-   };
+  };
 
 enum Cscreen{
     AOKDOK,
