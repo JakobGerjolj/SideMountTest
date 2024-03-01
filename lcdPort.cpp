@@ -60,6 +60,7 @@ void lcdPort::WriteStatus(Cscreen x)
     if(x==A0OK && CurrentScreen==NOSCREEN && LastScreen!=A0OK && AnalogStateStatus==2){
         lcd.clear();
         showData("A0 (4.4V) OK");
+         AnalogStateStatus++;
         CurrentScreen=A0OK;
         timer1=millis();
 
@@ -75,6 +76,7 @@ void lcdPort::WriteStatus(Cscreen x)
     if(x==A1OK && CurrentScreen==NOSCREEN && LastScreen!=A0OK && AnalogStateStatus==3){
         lcd.clear();
         showData("A1 (3.3V) OK");
+         AnalogStateStatus++;
         CurrentScreen=A1OK;
         timer1=millis();
 
@@ -83,6 +85,7 @@ void lcdPort::WriteStatus(Cscreen x)
     if(x==A2OK && CurrentScreen==NOSCREEN && LastScreen!=A2OK && AnalogStateStatus==4){
         lcd.clear();
         showData("A2 (5V) OK");
+         AnalogStateStatus++;
         CurrentScreen=A2OK;
         timer1=millis();
 
@@ -91,6 +94,7 @@ void lcdPort::WriteStatus(Cscreen x)
     if(x==A3OK && CurrentScreen==NOSCREEN && LastScreen!=A3OK && AnalogStateStatus==5){
         lcd.clear();
         showData("A3 (12V) OK");
+AnalogStateStatus++;
         CurrentScreen=A3OK;
         timer1=millis();
 
@@ -134,7 +138,7 @@ void lcdPort::lcdRefresher()
 {
     if(millis() >= (timer1 + 2000) && CurrentScreen != NOSCREEN){
         lcd.clear();
-        if(CurrentDiagnostic==ANALOG && AnalogStateStatus==5){
+        if(CurrentDiagnostic==ANALOG && AnalogStateStatus==6){
             AnalogStateStatus=1;
             CurrentDiagnostic=DIGITAL;
 
@@ -163,7 +167,7 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         lcd.clear();
           CurrentScreen=A0NA0V;
         timer1=millis();
-
+         AnalogStateStatus++;
         char myString[16]="A0 VALUE: ";
         char floatStr[3];
         sprintf(floatStr, "%.2f", y);
@@ -176,7 +180,7 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         lcd.clear();
         CurrentScreen=A1NA1V;
         timer1=millis();
-
+         AnalogStateStatus++;
         char myString[16]="A1 VALUE: ";
         char floatStr[3];
         sprintf(floatStr, "%.2f", y);
@@ -189,7 +193,7 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         lcd.clear();
         CurrentScreen=A2NA2V;
         timer1=millis();
-
+         AnalogStateStatus++;
         char myString[16]="A2 VALUE: ";
         char floatStr[3];
         sprintf(floatStr, "%.2f", y);
@@ -202,7 +206,7 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         lcd.clear();
         CurrentScreen=A3NA3V;
         timer1=millis();
-
+        AnalogStateStatus++;
         char myString[16]="A3 VALUE: ";
         char floatStr[3];
         sprintf(floatStr, "%.2f", y);
