@@ -168,11 +168,15 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
           CurrentScreen=A0NA0V;
         timer1=millis();
          AnalogStateStatus++;
-        char myString[16]="A0 VALUE: ";
-        char floatStr[20];
-        String st=String(y,2);
-        strcat(myString,st);
-        bothLines("44V(A0) NOT OKAY",myString);
+       // char myString[16]="A0 VALUE: ";
+       // char floatStr[20];
+       // String st=String(y,2);
+        //strcat(myString,st[0]);
+       // bothLines("44V(A0) NOT OKAY",myString);
+       // showData("44v(A0) NOT OKAY");
+        lcd.setCursor(0,1);
+        lcd.print("A0 VALUE: ");
+        lcd.print(y);
 
     }
 
