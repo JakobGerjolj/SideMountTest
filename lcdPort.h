@@ -16,6 +16,8 @@ public:
     
 
 private:
+    int DigitalStateStatus;
+    int AnalogStateStatus;
     StateOfDiagnostic CurrentDiagnostic;
     unsigned long timer1;
     LiquidCrystal_I2C lcd;

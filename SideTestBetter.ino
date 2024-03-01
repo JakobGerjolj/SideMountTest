@@ -29,36 +29,36 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
 
   if(!AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG){
     
-    myLCD.WriteStatus(ANOTOK);
+    myLCD.WriteStatus(ANOTOK); //1
     if(AnalogPins::is44OK()){
-      myLCD.WriteStatus(A0OK);
+      myLCD.WriteStatus(A0OK); //2
 
     }else {
-      myLCD.WriteStatusWithValue(A0NA0V, AnalogPins::GetValueFromPin(AnalogPins::Get44PIN()));
+      myLCD.WriteStatusWithValue(A0NA0V, AnalogPins::GetValueFromPin(AnalogPins::Get44PIN()));//2
 
     }
 
     if(AnalogPins::is3_3OK()){
-      myLCD.WriteStatus(A1OK);
+      myLCD.WriteStatus(A1OK);//3
 
     }else{
-      myLCD.WriteStatusWithValue(A1NA1V, AnalogPins::GetValueFromPin(AnalogPins::Get3_3PIN()));
+      myLCD.WriteStatusWithValue(A1NA1V, AnalogPins::GetValueFromPin(AnalogPins::Get3_3PIN()));//3
 
     }
 
     if(AnalogPins::is5OK()){
-      myLCD.WriteStatus(A2OK);
+      myLCD.WriteStatus(A2OK);//4
 
     }else {
-      myLCD.WriteStatusWithValue(A2NA2V, AnalogPins::GetValueFromPin(AnalogPins::Get5PIN()));
+      myLCD.WriteStatusWithValue(A2NA2V, AnalogPins::GetValueFromPin(AnalogPins::Get5PIN()));//4
 
     }
 
     if(AnalogPins::is12OK()){
-      myLCD.WriteStatus(A3OK);
+      myLCD.WriteStatus(A3OK);//5
 
     }else{
-      myLCD.WriteStatusWithValue(A3NA3V, AnalogPins::GetValueFromPin(AnalogPins::Get12PIN()));
+      myLCD.WriteStatusWithValue(A3NA3V, AnalogPins::GetValueFromPin(AnalogPins::Get12PIN()));//5
 
     }
 
@@ -69,15 +69,15 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
   
    if(!DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL){
     myLCD.WriteStatus(DNOK);
-    if(DigitalPins::is3_3OK()){//7
+    if(DigitalPins::is3_3OK()){//1
       myLCD.WriteStatus(D1OK);
 
-    }else myLCD.WriteStatus(D1ND1V);
+    }else myLCD.WriteStatus(D1ND1V); //1
 
     if(!DigitalPins::is4OK()){
-      myLCD.WriteStatus(D2OK);
+      myLCD.WriteStatus(D2OK);//2
 
-    }else myLCD.WriteStatus(D2ND2V);
+    }else myLCD.WriteStatus(D2ND2V);//2
 
 
   }else if(DigitalPins::isAllPinsOK()) {

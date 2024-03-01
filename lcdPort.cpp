@@ -5,6 +5,8 @@ lcdPort::lcdPort() : lcd(0x27,20,4)
 {
 CurrentScreen=NOSCREEN;
 LastScreen=NOSCREEN;
+AnalogStateStatus=1;
+DigitalStateStatus=1;
 }
 
 void lcdPort::lcdInit()
@@ -32,10 +34,11 @@ void lcdPort::WriteStatus(Cscreen x)
 
     }
 
-    if(x==ANOTOK && CurrentScreen==NOSCREEN && LastScreen!=ANOTOK && LastScreen!=A0OK && LastScreen != A0NA0V && LastScreen !=A1OK && LastScreen != A1NA1V && LastScreen !=A2OK && LastScreen!=A2NA2V && LastScreen !=A3OK && LastScreen !=A3NA3V){
+    if(x==ANOTOK && CurrentScreen==NOSCREEN && LastScreen!=ANOTOK && AnalogStateStatus==1){
         lcd.clear();
         showData("ANALOG NOT OK");
         CurrentScreen=ANOTOK;
+        AnalogStateStatus++;
         timer1=millis();
     }
 
@@ -54,7 +57,7 @@ void lcdPort::WriteStatus(Cscreen x)
 
     }
 
-    if(x==A0OK && CurrentScreen==NOSCREEN && LastScreen!=A0OK){
+    if(x==A0OK && CurrentScreen==NOSCREEN && LastScreen!=A0OK && AnalogStateStatus==2){
         lcd.clear();
         showData("A0 (4.4V) OK");
         CurrentScreen=A0OK;
@@ -69,7 +72,7 @@ void lcdPort::WriteStatus(Cscreen x)
         timer1=millis();
     }
 
-    if(x==A1OK && CurrentScreen==NOSCREEN && LastScreen!=A0OK){
+    if(x==A1OK && CurrentScreen==NOSCREEN && LastScreen!=A0OK && AnalogStateStatus==3){
         lcd.clear();
         showData("A1 (3.3V) OK");
         CurrentScreen=A1OK;
@@ -77,7 +80,7 @@ void lcdPort::WriteStatus(Cscreen x)
 
     }
 
-    if(x==A2OK && CurrentScreen==NOSCREEN && LastScreen!=A2OK){
+    if(x==A2OK && CurrentScreen==NOSCREEN && LastScreen!=A2OK && AnalogStateStatus==4){
         lcd.clear();
         showData("A2 (5V) OK");
         CurrentScreen=A2OK;
@@ -85,7 +88,7 @@ void lcdPort::WriteStatus(Cscreen x)
 
     }
 
-    if(x==A3OK && CurrentScreen==NOSCREEN && LastScreen!=A3OK){
+    if(x==A3OK && CurrentScreen==NOSCREEN && LastScreen!=A3OK && AnalogStateStatus==5){
         lcd.clear();
         showData("A3 (12V) OK");
         CurrentScreen=A3OK;
@@ -131,13 +134,15 @@ void lcdPort::lcdRefresher()
 {
     if(millis() >= (timer1 + 2000) && CurrentScreen != NOSCREEN){
         lcd.clear();
-        if(CurrentDiagnostic==ANALOG && (CurrentScreen==A3NA3V || CurrentScreen==A3OK)){
+        if(CurrentDiagnostic==ANALOG && AnalogStateStatus==5){
+            AnalogStateStatus=1;
             CurrentDiagnostic=DIGITAL;
 
         }
 
-        if(CurrentDiagnostic==DIGITAL && (CurrentScreen==A3NA3V || CurrentScreen==A3OK)){
+        if(CurrentDiagnostic==DIGITAL && DigitalStateStatus==2){
             CurrentDiagnostic=DIGITAL;
+            DigitalStateStatus=1;
 
         }
 
@@ -154,7 +159,7 @@ void lcdPort::lcdRefresher()
 void lcdPort::WriteStatusWithValue(Cscreen x, float y)
 {
 
-    if(x==A0NA0V && CurrentScreen==NOSCREEN && LastScreen!=A0NA0V){
+    if(x==A0NA0V && CurrentScreen==NOSCREEN && LastScreen!=A0NA0V && AnalogStateStatus==2){
         lcd.clear();
           CurrentScreen=A0NA0V;
         timer1=millis();
@@ -167,7 +172,7 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
 
     }
 
-     if(x==A1NA1V && CurrentScreen==NOSCREEN && LastScreen!=A1NA1V){
+     if(x==A1NA1V && CurrentScreen==NOSCREEN && LastScreen!=A1NA1V && AnalogStateStatus==3){
         lcd.clear();
         CurrentScreen=A1NA1V;
         timer1=millis();
@@ -180,7 +185,7 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
 
     }
 
-    if(x==A2NA2V && CurrentScreen==NOSCREEN && LastScreen!=A2NA2V){
+    if(x==A2NA2V && CurrentScreen==NOSCREEN && LastScreen!=A2NA2V && AnalogStateStatus==4){
         lcd.clear();
         CurrentScreen=A2NA2V;
         timer1=millis();
@@ -193,7 +198,7 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
 
     }
 
-        if(x==A3NA3V && CurrentScreen==NOSCREEN && LastScreen!=A3NA3V){
+        if(x==A3NA3V && CurrentScreen==NOSCREEN && LastScreen!=A3NA3V && AnalogStateStatus==5){
         lcd.clear();
         CurrentScreen=A3NA3V;
         timer1=millis();
