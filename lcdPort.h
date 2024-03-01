@@ -13,12 +13,13 @@ public:
     
 
 private:
-    unsigned long timer;
+    unsigned long timer1;
     LiquidCrystal_I2C lcd;
     Dstate CurrentDState;
     Cscreen CurrentScreen;
+    Cscreen LastScreen;
     void showData(const char* data) override;
-     void bothLines(String  x, String y);
+    void bothLines(String  x, String y);
     
 
 };

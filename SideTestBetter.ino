@@ -16,13 +16,15 @@ void setup() {
 
 void loop() {
   
-if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK() && millis()%2000==0){
+if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
   myLCD.WriteStatus(AOKDOK);
-  
+  myLCD.WriteStatus(SCAN);
 
 }
 
+myLCD.lcdRefresher();
 
+//after refreshing LastScreen=AOKDOK
 }
 
 

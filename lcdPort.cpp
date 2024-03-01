@@ -4,6 +4,7 @@
 lcdPort::lcdPort() : lcd(0x27,20,4)
 {
 CurrentScreen=NOSCREEN;
+LastScreen=NOSCREEN;
 }
 
 void lcdPort::lcdInit()
@@ -15,27 +16,29 @@ void lcdPort::lcdInit()
 
 void lcdPort::WriteStatus(Cscreen x)
 {
-    if(x==AOKDOK && CurrentScreen==NOSCREEN){
-        lcd.clear();
-        
+    if(x==AOKDOK && CurrentScreen==NOSCREEN && LastScreen!=AOKDOK){
+        lcd.clear();    
         bothLines("ANALOG OK", "DIGITAL OK");
         CurrentScreen=AOKDOK;
         timer1=millis();
     }
-    // else if(millis() >= (timer1+2000) && CurrentScreen==AOKDOK){
 
+    if(x==SCAN && CurrentScreen==NOSCREEN && LastScreen!=SCAN){
+        lcd.clear();
+        bothLines("AOK DOK", "STARTING CAN");
+        CurrentScreen=SCAN;
+        timer1=millis();
 
-    // }
-
+    }
 }
 
 void lcdPort::lcdRefresher()
 {
-    if(millis() >= timer1 + 2000 && CurrentScreen != NOSCREEN){
+    if(millis() >= (timer1 + 2000) && CurrentScreen != NOSCREEN){
         lcd.clear();
-        int tempEnu=CurrentScreen;
-        tempEnu++;
-        CurrentScreen=static_cast<Cscreen>(tempEnu);
+        LastScreen=CurrentScreen;
+        CurrentScreen=NOSCREEN;
+
 
     }
 
