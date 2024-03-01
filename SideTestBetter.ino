@@ -16,21 +16,79 @@ void setup() {
 
 void loop() {
   
-// if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
-//   myLCD.WriteStatus(AOKDOK);
-//   myLCD.WriteStatus(SCAN);
+if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
+  myLCD.SetCurrentDiagnostis(NONE);
+  myLCD.WriteStatus(AOKDOK);
+  myLCD.WriteStatus(SCAN); // mogoce premaknem kaseneje
 
-// }else if(!AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
-//   myLCD.WriteStatus(DOK);
-//   myLCD.WriteStatus(ANOTOK);
- 
-// }
+}else{
+  if(!AnalogPins::isAllPinsOK()){
+    myLCD.SetCurrentDiagnostis(ANALOG);
 
-// myLCD.lcdRefresher();
-Serial.println(AnalogPins::is12OK());
-Serial.println(AnalogPins::isAllPinsOK());
-Serial.println(DigitalPins::isAllPinsOK());
-delay(1000);
+  }else myLCD.SetCurrentDiagnostis(DIGITAL);
+
+  if(!AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG){
+    
+    myLCD.WriteStatus(ANOTOK);
+    if(AnalogPins::is44OK()){
+      myLCD.WriteStatus(A0OK);
+
+    }else {
+      myLCD.WriteStatusWithValue(A0NA0V, AnalogPins::GetValueFromPin(AnalogPins::Get44PIN()));
+
+    }
+
+    if(AnalogPins::is3_3OK()){
+      myLCD.WriteStatus(A1OK);
+
+    }else{
+      myLCD.WriteStatusWithValue(A1NA1V, AnalogPins::GetValueFromPin(AnalogPins::Get3_3PIN()));
+
+    }
+
+    if(AnalogPins::is5OK()){
+      myLCD.WriteStatus(A2OK);
+
+    }else {
+      myLCD.WriteStatusWithValue(A2NA2V, AnalogPins::GetValueFromPin(AnalogPins::Get5PIN()));
+
+    }
+
+    if(AnalogPins::is12OK()){
+      myLCD.WriteStatus(A3OK);
+
+    }else{
+      myLCD.WriteStatusWithValue(A3NA3V, AnalogPins::GetValueFromPin(AnalogPins::Get12PIN()));
+
+    }
+
+  }else if(AnalogPins::isAllPinsOK()) {
+    myLCD.WriteStatus(AOK);
+    myLCD.SetCurrentDiagnostis(DIGITAL);
+    }
+  
+   if(!DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL){
+    myLCD.WriteStatus(DNOK);
+    if(DigitalPins::is3_3OK()){//7
+      myLCD.WriteStatus(D1OK);
+
+    }else myLCD.WriteStatus(D1ND1V);
+
+    if(!DigitalPins::is4OK()){
+      myLCD.WriteStatus(D2OK);
+
+    }else myLCD.WriteStatus(D2ND2V);
+
+
+  }else if(DigitalPins::isAllPinsOK()) {
+    myLCD.SetCurrentDiagnostis(ANALOG);
+    myLCD.WriteStatus(DOK);}
+  
+
+}
+
+ myLCD.lcdRefresher();
+
 }
 
 

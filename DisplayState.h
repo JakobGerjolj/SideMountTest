@@ -1,11 +1,18 @@
 #pragma once
 
- enum Dstate{
-        CLOSED,
-        OPEN
+enum StateOfDiagnostic{
+    ANALOG,
+    DIGITAL,
+    NONE
+
+};
+
+enum Dstate{
+       CLOSED,
+       OPEN
         
 
-    };
+   };
 
 enum Cscreen{
     AOKDOK,

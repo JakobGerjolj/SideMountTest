@@ -16,6 +16,7 @@ void lcdPort::lcdInit()
 
 void lcdPort::WriteStatus(Cscreen x)
 {
+
     if(x==AOKDOK && CurrentScreen==NOSCREEN && LastScreen!=AOKDOK){
         lcd.clear();    
         bothLines("ANALOG OK", "DIGITAL OK");
@@ -31,7 +32,7 @@ void lcdPort::WriteStatus(Cscreen x)
 
     }
 
-    if(x==ANOTOK && CurrentScreen==NOSCREEN && LastScreen!=ANOTOK){
+    if(x==ANOTOK && CurrentScreen==NOSCREEN && LastScreen!=ANOTOK && LastScreen!=A0OK && LastScreen != A0NA0V && LastScreen !=A1OK && LastScreen != A1NA1V && LastScreen !=A2OK && LastScreen!=A2NA2V && LastScreen !=A3OK && LastScreen !=A3NA3V){
         lcd.clear();
         showData("ANALOG NOT OK");
         CurrentScreen=ANOTOK;
@@ -44,18 +45,176 @@ void lcdPort::WriteStatus(Cscreen x)
         CurrentScreen=DOK;
         timer1=millis();
     }
+
+    if(x==DNOK && CurrentScreen==NOSCREEN && LastScreen!=DNOK){
+        lcd.clear();
+        showData("DIGITAL NOT OK");
+        CurrentScreen=DNOK;
+        timer1=millis();
+
+    }
+
+    if(x==A0OK && CurrentScreen==NOSCREEN && LastScreen!=A0OK){
+        lcd.clear();
+        showData("A0 (4.4V) OK");
+        CurrentScreen=A0OK;
+        timer1=millis();
+
+    }
+
+    if(x==AOK && CurrentScreen==NOSCREEN && LastScreen!=A0OK){
+        lcd.clear();
+        showData("ANALOG OK");
+        CurrentScreen=AOK;
+        timer1=millis();
+    }
+
+    if(x==A1OK && CurrentScreen==NOSCREEN && LastScreen!=A0OK){
+        lcd.clear();
+        showData("A1 (3.3V) OK");
+        CurrentScreen=A1OK;
+        timer1=millis();
+
+    }
+
+    if(x==A2OK && CurrentScreen==NOSCREEN && LastScreen!=A2OK){
+        lcd.clear();
+        showData("A2 (5V) OK");
+        CurrentScreen=A2OK;
+        timer1=millis();
+
+    }
+
+    if(x==A3OK && CurrentScreen==NOSCREEN && LastScreen!=A3OK){
+        lcd.clear();
+        showData("A3 (12V) OK");
+        CurrentScreen=A3OK;
+        timer1=millis();
+
+    }
+
+    if(x==D1OK && CurrentScreen==NOSCREEN && LastScreen!=D1OK){
+        lcd.clear();
+        showData("D1(7) OK");
+        CurrentScreen=D1OK;
+        timer1=millis();
+
+    }
+
+    if(x==D1ND1V && CurrentScreen==NOSCREEN && LastScreen!=D1ND1V){
+        lcd.clear();
+        bothLines("D1(7) NOT OK", "D1 VALUE: LOW");
+        CurrentScreen=D1OK;
+        timer1=millis();
+
+    }
+
+
+    if(x==D2OK && CurrentScreen==NOSCREEN && LastScreen!=D2OK){
+        lcd.clear();
+        showData("D2(6) OK");
+        CurrentScreen=D2OK;
+        timer1=millis();
+
+    }
+
+    if(x==D2ND2V && CurrentScreen==NOSCREEN && LastScreen!=D2ND2V){
+        lcd.clear();
+        bothLines("D2(6) NOT OK", "D2 VALUE: LOW");
+        CurrentScreen=D1OK;
+        timer1=millis();
+
+    }
 }
 
 void lcdPort::lcdRefresher()
 {
     if(millis() >= (timer1 + 2000) && CurrentScreen != NOSCREEN){
         lcd.clear();
+        if(CurrentDiagnostic==ANALOG && (CurrentScreen==A3NA3V || CurrentScreen==A3OK)){
+            CurrentDiagnostic=DIGITAL;
+
+        }
+
+        if(CurrentDiagnostic==DIGITAL && (CurrentScreen==A3NA3V || CurrentScreen==A3OK)){
+            CurrentDiagnostic=DIGITAL;
+
+        }
+
         LastScreen=CurrentScreen;
         CurrentScreen=NOSCREEN;
 
 
     }
 
+  
+
+}
+
+void lcdPort::WriteStatusWithValue(Cscreen x, float y)
+{
+
+    if(x==A0NA0V && CurrentScreen==NOSCREEN && LastScreen!=A0NA0V){
+        lcd.clear();
+          CurrentScreen=A0NA0V;
+        timer1=millis();
+
+        char myString[16]="A0 VALUE: ";
+        char floatStr[3];
+        sprintf(floatStr, "%.2f", y);
+        strcat(myString,floatStr);
+        bothLines("44V(A0) NOT OKAY",myString);
+
+    }
+
+     if(x==A1NA1V && CurrentScreen==NOSCREEN && LastScreen!=A1NA1V){
+        lcd.clear();
+        CurrentScreen=A1NA1V;
+        timer1=millis();
+
+        char myString[16]="A1 VALUE: ";
+        char floatStr[3];
+        sprintf(floatStr, "%.2f", y);
+        strcat(myString,floatStr);
+        bothLines("33V(A1) NOT OKAY",myString);
+
+    }
+
+    if(x==A2NA2V && CurrentScreen==NOSCREEN && LastScreen!=A2NA2V){
+        lcd.clear();
+        CurrentScreen=A2NA2V;
+        timer1=millis();
+
+        char myString[16]="A2 VALUE: ";
+        char floatStr[3];
+        sprintf(floatStr, "%.2f", y);
+        strcat(myString,floatStr);
+        bothLines("5V(A2) NOT OKAY",myString);
+
+    }
+
+        if(x==A3NA3V && CurrentScreen==NOSCREEN && LastScreen!=A3NA3V){
+        lcd.clear();
+        CurrentScreen=A3NA3V;
+        timer1=millis();
+
+        char myString[16]="A3 VALUE: ";
+        char floatStr[3];
+        sprintf(floatStr, "%.2f", y);
+        strcat(myString,floatStr);
+        bothLines("12V(A3) NOT OKAY",myString);
+
+    }
+}
+
+void lcdPort::SetCurrentDiagnostis(StateOfDiagnostic x)
+{
+    CurrentDiagnostic=x;
+}
+
+StateOfDiagnostic lcdPort::GetCurrentDiagnostic()
+{
+    return CurrentDiagnostic;
 }
 
 void lcdPort::showData(const char *data)

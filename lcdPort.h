@@ -9,10 +9,14 @@ public:
     void lcdInit();
     void WriteStatus(Cscreen x);
     void lcdRefresher();
+    void WriteStatusWithValue(Cscreen x, float y);
+    void SetCurrentDiagnostis(StateOfDiagnostic x);
+    StateOfDiagnostic GetCurrentDiagnostic();
 
     
 
 private:
+    StateOfDiagnostic CurrentDiagnostic;
     unsigned long timer1;
     LiquidCrystal_I2C lcd;
     Dstate CurrentDState;
