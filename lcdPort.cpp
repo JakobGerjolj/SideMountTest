@@ -169,7 +169,7 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         timer1=millis();
          AnalogStateStatus++;
         char myString[16]="A0 VALUE: ";
-        char floatStr[3];
+        char floatStr[20];
         sprintf(floatStr, "%.2f", y);
         strcat(myString,floatStr);
         bothLines("44V(A0) NOT OKAY",myString);
