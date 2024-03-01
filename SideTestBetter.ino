@@ -16,15 +16,21 @@ void setup() {
 
 void loop() {
   
-if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
-  myLCD.WriteStatus(AOKDOK);
-  myLCD.WriteStatus(SCAN);
+// if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
+//   myLCD.WriteStatus(AOKDOK);
+//   myLCD.WriteStatus(SCAN);
 
-}
+// }else if(!AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
+//   myLCD.WriteStatus(DOK);
+//   myLCD.WriteStatus(ANOTOK);
+ 
+// }
 
-myLCD.lcdRefresher();
-
-//after refreshing LastScreen=AOKDOK
+// myLCD.lcdRefresher();
+Serial.println(AnalogPins::is12OK());
+Serial.println(AnalogPins::isAllPinsOK());
+Serial.println(DigitalPins::isAllPinsOK());
+delay(1000);
 }
 
 

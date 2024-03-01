@@ -58,7 +58,7 @@ int AnalogPins::Get44PIN()
 
 bool AnalogPins::isAllPinsOK()
 {
-    if(AnalogPins::is12OK && AnalogPins::is3_3OK && AnalogPins::is44OK && AnalogPins::is5OK){
+    if(AnalogPins::is12OK() && AnalogPins::is3_3OK() && AnalogPins::is44OK() && AnalogPins::is5OK()){
         return true;
 
     }else return false;

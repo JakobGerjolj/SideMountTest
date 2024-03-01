@@ -24,6 +24,8 @@ enum Cscreen{
     D1OK,
     D2ND2V,
     D2OK,
+    AOK,
+    DOK,
     NOSCREEN,
     CANSCREEN
 

@@ -30,6 +30,20 @@ void lcdPort::WriteStatus(Cscreen x)
         timer1=millis();
 
     }
+
+    if(x==ANOTOK && CurrentScreen==NOSCREEN && LastScreen!=ANOTOK){
+        lcd.clear();
+        showData("ANALOG NOT OK");
+        CurrentScreen=ANOTOK;
+        timer1=millis();
+    }
+
+    if(x==DOK && CurrentScreen==NOSCREEN && LastScreen!=DOK){
+        lcd.clear();
+        showData("DIGITAL OK");
+        CurrentScreen=DOK;
+        timer1=millis();
+    }
 }
 
 void lcdPort::lcdRefresher()
