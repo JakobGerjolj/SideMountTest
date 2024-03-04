@@ -7,6 +7,7 @@ CurrentScreen=NOSCREEN;
 LastScreen=NOSCREEN;
 AnalogStateStatus=1;
 DigitalStateStatus=1;
+CurrentDiagnostic=ANALOG;
 }
 
 void lcdPort::lcdInit()
@@ -44,6 +45,7 @@ void lcdPort::WriteStatus(Cscreen x)
 
     if(x==DOK && CurrentScreen==NOSCREEN && LastScreen!=DOK){
         lcd.clear();
+
         showData("DIGITAL OK");
         CurrentScreen=DOK;
         timer1=millis();
@@ -51,6 +53,7 @@ void lcdPort::WriteStatus(Cscreen x)
 
     if(x==DNOK && CurrentScreen==NOSCREEN && LastScreen!=DNOK){
         lcd.clear();
+
         showData("DIGITAL NOT OK");
         CurrentScreen=DNOK;
         timer1=millis();
@@ -102,6 +105,7 @@ AnalogStateStatus++;
 
     if(x==D1OK && CurrentScreen==NOSCREEN && LastScreen!=D1OK){
         lcd.clear();
+        DigitalStateStatus++;
         showData("D1(7) OK");
         CurrentScreen=D1OK;
         timer1=millis();
@@ -110,6 +114,7 @@ AnalogStateStatus++;
 
     if(x==D1ND1V && CurrentScreen==NOSCREEN && LastScreen!=D1ND1V){
         lcd.clear();
+        DigitalStateStatus++;
         bothLines("D1(7) NOT OK", "D1 VALUE: LOW");
         CurrentScreen=D1OK;
         timer1=millis();
@@ -119,6 +124,7 @@ AnalogStateStatus++;
 
     if(x==D2OK && CurrentScreen==NOSCREEN && LastScreen!=D2OK){
         lcd.clear();
+        DigitalStateStatus++;
         showData("D2(6) OK");
         CurrentScreen=D2OK;
         timer1=millis();
@@ -127,6 +133,7 @@ AnalogStateStatus++;
 
     if(x==D2ND2V && CurrentScreen==NOSCREEN && LastScreen!=D2ND2V){
         lcd.clear();
+        DigitalStateStatus++;
         bothLines("D2(6) NOT OK", "D2 VALUE: LOW");
         CurrentScreen=D1OK;
         timer1=millis();
@@ -144,8 +151,8 @@ void lcdPort::lcdRefresher()
 
         }
 
-        if(CurrentDiagnostic==DIGITAL && DigitalStateStatus==2){
-            CurrentDiagnostic=DIGITAL;
+        if(CurrentDiagnostic==DIGITAL && DigitalStateStatus==3){
+            CurrentDiagnostic=ANALOG;
             DigitalStateStatus=1;
 
         }
@@ -165,15 +172,10 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
 
     if(x==A0NA0V && CurrentScreen==NOSCREEN && LastScreen!=A0NA0V && AnalogStateStatus==2){
         lcd.clear();
-          CurrentScreen=A0NA0V;
+        CurrentScreen=A0NA0V;
         timer1=millis();
-         AnalogStateStatus++;
-       // char myString[16]="A0 VALUE: ";
-       // char floatStr[20];
-       // String st=String(y,2);
-        //strcat(myString,st[0]);
-       // bothLines("44V(A0) NOT OKAY",myString);
-       // showData("44v(A0) NOT OKAY");
+        AnalogStateStatus++;
+        showData("44v(A0) NOT OKAY");
         lcd.setCursor(0,1);
         lcd.print("A0 VALUE: ");
         lcd.print(y);
@@ -185,11 +187,11 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         CurrentScreen=A1NA1V;
         timer1=millis();
          AnalogStateStatus++;
-        char myString[11]="A1 VALUE: ";
-        char floatStr[5];//HERE LAST
-        sprintf(floatStr, "%.2f", y);
-        strcat(myString,floatStr);
-        bothLines("33V(A1) NOT OKAY",myString);
+        showData("33V(A1) NOT OKAY");
+        lcd.setCursor(0,1);
+        lcd.print("A1 VALUE: ");
+        lcd.print(y);
+
 
     }
 
@@ -198,11 +200,11 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         CurrentScreen=A2NA2V;
         timer1=millis();
          AnalogStateStatus++;
-        char myString[16]="A2 VALUE: ";
-        char floatStr[3];
-        sprintf(floatStr, "%.2f", y);
-        strcat(myString,floatStr);
-        bothLines("5V(A2) NOT OKAY",myString);
+        showData("5V(A2) NOT OKAY");
+        lcd.setCursor(0,1);
+        lcd.print("A2 VALUE: ");
+        lcd.print(y);
+
 
     }
 
@@ -211,11 +213,11 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         CurrentScreen=A3NA3V;
         timer1=millis();
         AnalogStateStatus++;
-        char myString[16]="A3 VALUE: ";
-        char floatStr[3];
-        sprintf(floatStr, "%.2f", y);
-        strcat(myString,floatStr);
-        bothLines("12V(A3) NOT OKAY",myString);
+        showData("12V(A3) NOT OKAY");
+        lcd.setCursor(0,1);
+        lcd.print("A3 VALUE: ");
+        lcd.print(y);
+
 
     }
 }
