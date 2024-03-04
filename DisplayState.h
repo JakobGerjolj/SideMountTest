@@ -3,7 +3,7 @@
 enum StateOfDiagnostic{
     ANALOG,
     DIGITAL,
-    CAN,
+    CANDig,
     NONE
 
 };

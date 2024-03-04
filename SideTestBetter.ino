@@ -4,13 +4,13 @@
 #include "lcdPort.h"
 #include "LED.h"
 
-bool LEDTEST=false;
-
+CAN myCAN;
 lcdPort myLCD;
 LED myLED;
 void setup() {
   myLCD.lcdInit();
   myLED.Init();
+  myCAN.CANInit();
   Serial.begin(115200);
 }
 
@@ -20,13 +20,13 @@ void setup() {
 void loop() {
 
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
-  myLCD.SetCurrentDiagnostis(CAN);
+  myLCD.SetCurrentDiagnostis(CANDig);
   myLCD.WriteStatus(AOKDOK);
   myLCD.WriteStatus(SCAN); // mogoce premaknem kaseneje
 
 }else{
 
-  if(myLCD.GetCurrentDiagnostic()==CAN){
+  if(myLCD.GetCurrentDiagnostic()==CANDig){
     myLCD.SetCurrentDiagnostis(ANALOG);
 
   }
@@ -93,7 +93,8 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
 
 }
 
-if(myLCD.GetCurrentDiagnostic()==CAN){
+if(myLCD.GetCurrentDiagnostic()==CANDig){
+
 
 
 }
@@ -101,7 +102,7 @@ if(myLCD.GetCurrentDiagnostic()==CAN){
 
 
 
- myLCD.lcdRefresher();
+myLCD.lcdRefresher();
 
 myLED.LEDrefresher();
 }
