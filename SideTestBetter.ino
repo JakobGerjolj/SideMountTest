@@ -2,14 +2,7 @@
 #include "DigitalPins.h"
 #include "CAN.h"
 #include "lcdPort.h"
-<<<<<<< HEAD
 #include "LED.h"
-=======
-<<<<<<< HEAD
-#include "LED.h"
-=======
->>>>>>> 2fd1299 (Point before testing LEDs)
->>>>>>> temp_branch
 
 bool LEDTEST=false;
 
@@ -25,21 +18,7 @@ void setup() {
 
 
 void loop() {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> temp_branch
-  if(!LEDTEST){
-    myLED.turnONLEDNFC();
-    myLED.turnONLEDZERO();
-    LEDTEST=true;
-<<<<<<< HEAD
-  }
 
-=======
-  }
-=======
-  
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
   myLCD.SetCurrentDiagnostis(CAN);
   myLCD.WriteStatus(AOKDOK);
@@ -123,9 +102,7 @@ if(myLCD.GetCurrentDiagnostic()==CAN){
 
 
  myLCD.lcdRefresher();
->>>>>>> 2fd1299 (Point before testing LEDs)
 
->>>>>>> temp_branch
 myLED.LEDrefresher();
 }
 
