@@ -12,5 +12,9 @@ private:
     unsigned long timer1;
     unsigned long timer2;
 
+private:   
+    int led1=5;
+    int led2=3;
+
 
 };
