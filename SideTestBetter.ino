@@ -94,7 +94,7 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
 }
 
 if(myLCD.GetCurrentDiagnostic()==CAN){
-  
+
 
 }
 
