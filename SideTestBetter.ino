@@ -23,7 +23,7 @@ myCAN.ProccessCAN();
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
   myLCD.SetCurrentDiagnostis(CANDig);
   myLCD.WriteStatus(AOKDOK);
-  myLCD.WriteStatus(SCAN); // mogoce premaknem kaseneje
+  //myLCD.WriteStatus(SCAN); // mogoce premaknem kaseneje
 
 }else{
 
@@ -70,9 +70,9 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
     myLCD.SetCurrentDiagnostis(DIGITAL);
     }
   
-   if(!false && myLCD.GetCurrentDiagnostic()==DIGITAL){ //instead of false status of digitalPINS
+   if(!DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL){ //instead of false status of digitalPINS
     myLCD.WriteStatus(DNOK); //1
-    if(false){// Status of Dpin1
+    if(DigitalPins::is3_3OK()){// Status of Dpin1
       myLCD.WriteStatus(D1OK);//2
 
     }else {
@@ -80,13 +80,13 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
 
     }
 
-    if(false){// Status of Dpin2
+    if(DigitalPins::is4OK()){// Status of Dpin2
       myLCD.WriteStatus(D2OK);//3
     }else {
       myLCD.WriteStatus(D2ND2V);//3
     }
 
-  }else if(false) {
+  }else if(DigitalPins::isAllPinsOK()) {
     myLCD.SetCurrentDiagnostis(ANALOG);
     myLCD.WriteStatus(DOK);
     }
@@ -97,7 +97,14 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
 if(myLCD.GetCurrentDiagnostic()==CANDig){
   myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed()); // also add counter to button presses
 
+  if(myCAN.ReturnZERO()){
+    myLED.turnONLEDZERO();
 
+  }
+  if(myCAN.ReturnNFC()){
+    myLED.turnONLEDNFC();
+
+  }
 
 }
 
