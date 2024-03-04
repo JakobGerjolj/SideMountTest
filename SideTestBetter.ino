@@ -70,25 +70,25 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
     myLCD.SetCurrentDiagnostis(DIGITAL);
     }
   
-   if(!DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL){
-    myLCD.WriteStatus(DNOK);
-    if(DigitalPins::is3_3OK()){//1
-      myLCD.WriteStatus(D1OK);
+   if(!false && myLCD.GetCurrentDiagnostic()==DIGITAL){
+    myLCD.WriteStatus(DNOK); //1
+    if(false){
+      myLCD.WriteStatus(D1OK);//2
 
     }else {
-      myLCD.WriteStatus(D1ND1V); //1
+      myLCD.WriteStatus(D1ND1V); //2
 
     }
 
-    if(!DigitalPins::is4OK()){
-      myLCD.WriteStatus(D2OK);//2
+    if(false){
+      myLCD.WriteStatus(D2OK);//3
       //myLCD.SetCurrentDiagnostis(ANALOG);
     }else {
-      myLCD.WriteStatus(D2ND2V);//2
+      myLCD.WriteStatus(D2ND2V);//3
       //myLCD.SetCurrentDiagnostis(ANALOG);
     }
 
-  }else if(DigitalPins::isAllPinsOK()) {
+  }else if(false) {
     myLCD.SetCurrentDiagnostis(ANALOG);
     myLCD.WriteStatus(DOK);
     }

@@ -51,9 +51,9 @@ void lcdPort::WriteStatus(Cscreen x)
         timer1=millis();
     }
 
-    if(x==DNOK && CurrentScreen==NOSCREEN && LastScreen!=DNOK){
+    if(x==DNOK && CurrentScreen==NOSCREEN && LastScreen!=DNOK && DigitalStateStatus==1){
         lcd.clear();
-
+        DigitalStateStatus++;
         showData("DIGITAL NOT OK");
         CurrentScreen=DNOK;
         timer1=millis();
@@ -103,7 +103,7 @@ AnalogStateStatus++;
 
     }
 
-    if(x==D1OK && CurrentScreen==NOSCREEN && LastScreen!=D1OK){
+    if(x==D1OK && CurrentScreen==NOSCREEN && LastScreen!=D1OK && DigitalStateStatus==2){
         lcd.clear();
         DigitalStateStatus++;
         showData("D1(7) OK");
@@ -112,17 +112,17 @@ AnalogStateStatus++;
 
     }
 
-    if(x==D1ND1V && CurrentScreen==NOSCREEN && LastScreen!=D1ND1V){
+    if(x==D1ND1V && CurrentScreen==NOSCREEN && LastScreen!=D1ND1V && DigitalStateStatus==2){
         lcd.clear();
         DigitalStateStatus++;
         bothLines("D1(7) NOT OK", "D1 VALUE: LOW");
-        CurrentScreen=D1OK;
+        CurrentScreen=D1ND1V;
         timer1=millis();
 
     }
 
 
-    if(x==D2OK && CurrentScreen==NOSCREEN && LastScreen!=D2OK){
+    if(x==D2OK && CurrentScreen==NOSCREEN && LastScreen!=D2OK && DigitalStateStatus==3){
         lcd.clear();
         DigitalStateStatus++;
         showData("D2(6) OK");
@@ -131,11 +131,11 @@ AnalogStateStatus++;
 
     }
 
-    if(x==D2ND2V && CurrentScreen==NOSCREEN && LastScreen!=D2ND2V){
+    if(x==D2ND2V && CurrentScreen==NOSCREEN && LastScreen!=D2ND2V && DigitalStateStatus==3){
         lcd.clear();
         DigitalStateStatus++;
         bothLines("D2(6) NOT OK", "D2 VALUE: LOW");
-        CurrentScreen=D1OK;
+        CurrentScreen=D2ND2V;
         timer1=millis();
 
     }
@@ -151,7 +151,7 @@ void lcdPort::lcdRefresher()
 
         }
 
-        if(CurrentDiagnostic==DIGITAL && DigitalStateStatus==3){
+        if(CurrentDiagnostic==DIGITAL && DigitalStateStatus==4){
             CurrentDiagnostic=ANALOG;
             DigitalStateStatus=1;
 
