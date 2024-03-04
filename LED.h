@@ -3,10 +3,14 @@
 class LED{
 public:
     void Init();
-
+    void turnONLEDNFC();
+    void turnONLEDZERO();
+    void LEDrefresher();
 private:   
-    int led1=5;
-    int led2=3;
+    int ledNFC=5;
+    int ledZERO=3;
+    unsigned long timer1;
+    unsigned long timer2;
 
 
 };
