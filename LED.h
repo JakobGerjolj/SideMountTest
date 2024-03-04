@@ -12,5 +12,11 @@ private:
     unsigned long timer1;
     unsigned long timer2;
 
+private:   
+    int ledNFC=5;
+    int ledZERO=3;
+    unsigned long timer1;
+    unsigned long timer2;
+
 
 };

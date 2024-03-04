@@ -2,6 +2,10 @@
 
 void LED::Init()
 {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> temp_branch
     pinMode(ledNFC,OUTPUT);
     pinMode(ledZERO,OUTPUT);
 }
@@ -30,3 +34,11 @@ void LED::LEDrefresher()
 
     }
 }
+<<<<<<< HEAD
+=======
+=======
+    pinMode(led1,OUTPUT);
+    pinMode(led2,OUTPUT);
+}
+>>>>>>> 2fd1299 (Point before testing LEDs)
+>>>>>>> temp_branch
