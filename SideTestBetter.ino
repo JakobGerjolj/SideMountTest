@@ -7,18 +7,21 @@
 CAN myCAN;
 lcdPort myLCD;
 LED myLED;
+unsigned long start;
+unsigned long end;
 void setup() {
   myLCD.lcdInit();
   myLED.Init();
   myCAN.CANInit();
   Serial.begin(115200);
+
 }
 
 
 
 
 void loop() {
-
+start=millis();
 myCAN.ProccessCAN();
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
   myLCD.SetCurrentDiagnostis(CANDig);
@@ -113,6 +116,11 @@ if(myLCD.GetCurrentDiagnostic()==CANDig){
 
 myLCD.lcdRefresher();
 myLED.LEDrefresher();
+
+end=millis();
+if((end-start)<60){
+delay(60-(end-start));
+}
 }
 
 

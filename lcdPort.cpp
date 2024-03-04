@@ -165,7 +165,7 @@ void lcdPort::lcdRefresher()
     }
 
     if(millis()%1500==0 && CurrentScreen == CANSCREEN && CurrentDiagnostic== CANDig){
-       // lcd.clear();
+        lcd.clear();
 
     }
     if(CurrentScreen==CANSCREEN && CurrentDiagnostic!=CANDig){
