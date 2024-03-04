@@ -12,6 +12,8 @@ public:
     bool ReturnZERO();
     char ReturnLastButtonPressed();
     bool ReturnNFC();
+    int  ReturnLastButtonsPressed();
+    
 
 private:
     bool ReadCAN();
@@ -20,6 +22,8 @@ private:
     uint16_t T1;
     uint16_t T2;
     uint16_t HAL;
+    int countLastButtonPressed{0};
+    char CurrentButtonCounted;
     bool ZERO;
     char LastButtonPressed;
     bool NFC;

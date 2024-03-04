@@ -98,7 +98,7 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
 }
 
 if(myLCD.GetCurrentDiagnostic()==CANDig){
-  myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed()); // also add counter to button presses
+  myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed()); // also add counter to button presses
 
   if(myCAN.ReturnZERO()){
     myLED.turnONLEDZERO();

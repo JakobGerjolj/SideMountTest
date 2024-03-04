@@ -49,6 +49,8 @@ void CAN::ProccessCAN()
             NFC=true;
 
         }else NFC=false;
+        
+
 
     }
 
@@ -94,4 +96,20 @@ char CAN::ReturnLastButtonPressed()
 bool CAN::ReturnNFC()
 {
     return NFC;
+}
+
+int CAN::ReturnLastButtonsPressed()
+{
+
+    if(LastButtonPressed==CurrentButtonCounted){
+        countLastButtonPressed++;
+
+    }else {
+        countLastButtonPressed=LastButtonPressed;
+        countLastButtonPressed=1;
+
+    }
+
+
+    return 0;
 }

@@ -170,7 +170,7 @@ void lcdPort::lcdRefresher()
     }
     if(CurrentScreen==CANSCREEN && CurrentDiagnostic!=CANDig){
         CurrentDiagnostic=ANALOG;
-       // lcd.clear();
+        lcd.clear();
 
 
     }
@@ -243,7 +243,7 @@ StateOfDiagnostic lcdPort::GetCurrentDiagnostic()
     return CurrentDiagnostic;
 }
 
-void lcdPort::WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char tipka)
+void lcdPort::WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char tipka, int counter)
 {
  if(Scr==CANSCREEN){
     CurrentScreen=CANSCREEN;
@@ -251,6 +251,9 @@ void lcdPort::WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char
     lcd.print("TIPKA: ");
     lcd.setCursor(6,0);
     lcd.print(tipka);
+    lcd.setCursor(7,0);
+    lcd.print(".");
+    lcd.print(counter);
     lcd.setCursor(9,0);
     lcd.print("T1:");
     lcd.print(T1);

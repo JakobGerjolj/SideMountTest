@@ -14,7 +14,7 @@ public:
     void WriteStatusWithValue(Cscreen x, float y);
     void SetCurrentDiagnostis(StateOfDiagnostic x);
     StateOfDiagnostic GetCurrentDiagnostic();
-    void WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char tipka);
+    void WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char tipka, int counter);
 
     
 
