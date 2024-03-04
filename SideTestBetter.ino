@@ -2,7 +2,6 @@
 #include "DigitalPins.h"
 #include "CAN.h"
 #include "lcdPort.h"
-#include "State.h"
 
 
 lcdPort myLCD;
@@ -17,11 +16,16 @@ void setup() {
 void loop() {
   
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
-  myLCD.SetCurrentDiagnostis(NONE);
+  myLCD.SetCurrentDiagnostis(CAN);
   myLCD.WriteStatus(AOKDOK);
   myLCD.WriteStatus(SCAN); // mogoce premaknem kaseneje
 
 }else{
+
+  if(myLCD.GetCurrentDiagnostic()==CAN){
+    myLCD.SetCurrentDiagnostis(ANALOG);
+
+  }
 
   if(!AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG){
     
@@ -61,9 +65,9 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
     myLCD.SetCurrentDiagnostis(DIGITAL);
     }
   
-   if(!false && myLCD.GetCurrentDiagnostic()==DIGITAL){
+   if(!false && myLCD.GetCurrentDiagnostic()==DIGITAL){ //instead of false status of digitalPINS
     myLCD.WriteStatus(DNOK); //1
-    if(false){
+    if(false){// Status of Dpin1
       myLCD.WriteStatus(D1OK);//2
 
     }else {
@@ -71,7 +75,7 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
 
     }
 
-    if(false){
+    if(false){// Status of Dpin2
       myLCD.WriteStatus(D2OK);//3
     }else {
       myLCD.WriteStatus(D2ND2V);//3
@@ -84,6 +88,13 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
   
 
 }
+
+if(myLCD.GetCurrentDiagnostic()==CAN){
+  
+
+}
+
+
 
 
  myLCD.lcdRefresher();

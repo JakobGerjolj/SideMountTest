@@ -19,6 +19,7 @@ void lcdPort::lcdInit()
 
 void lcdPort::WriteStatus(Cscreen x)
 {
+    
 
     if(x==AOKDOK && CurrentScreen==NOSCREEN && LastScreen!=AOKDOK){
         lcd.clear();    

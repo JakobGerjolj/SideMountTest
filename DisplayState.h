@@ -3,6 +3,7 @@
 enum StateOfDiagnostic{
     ANALOG,
     DIGITAL,
+    CAN,
     NONE
 
 };
@@ -11,7 +12,6 @@ enum Dstate{
        CLOSED,
        OPEN
         
-
   };
 
 enum Cscreen{
