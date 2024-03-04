@@ -19,6 +19,7 @@ void setup() {
 
 void loop() {
 
+myCAN.ProccessCAN();
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
   myLCD.SetCurrentDiagnostis(CANDig);
   myLCD.WriteStatus(AOKDOK);
@@ -94,6 +95,7 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
 }
 
 if(myLCD.GetCurrentDiagnostic()==CANDig){
+  myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed()); // also add counter to button presses
 
 
 
@@ -103,7 +105,6 @@ if(myLCD.GetCurrentDiagnostic()==CANDig){
 
 
 myLCD.lcdRefresher();
-
 myLED.LEDrefresher();
 }
 
