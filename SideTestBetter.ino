@@ -45,7 +45,7 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
       myLCD.WriteStatus(A0OK);
 
     }else {
-      myLCD.WriteStatusWithValue(A0NA0V, AnalogPins::GetValueFromPin(AnalogPins::Get44PIN()));//2
+      myLCD.WriteStatusWithValue(A0NA0V, AnalogPins::GetValueFromPin(AnalogPins::Get44PIN()));
 
     }
 
