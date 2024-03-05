@@ -23,7 +23,7 @@ void lcdPort::WriteStatus(Cscreen x)
 
     if(x==AOKDOK && CurrentScreen==NOSCREEN && LastScreen!=AOKDOK){
         lcd.clear();    
-        bothLines("ANALOG", "DIGIT");
+        bothLines("ANALOG OK", "DIGITAL OK");
         CurrentScreen=AOKDOK;
         timer1=millis();
     }
@@ -144,8 +144,16 @@ AnalogStateStatus++;
 
 void lcdPort::lcdRefresher()
 {
+
+        if(LastScreen==SCAN && CurrentDiagnostic!=CANDig){
+            CurrentDiagnostic=CANDig;
+            LastScreen=NOSCREEN;
+            
+        }
+
     if(millis() >= (timer1 + 2000) && CurrentScreen != NOSCREEN && CurrentDiagnostic!=CANDig){
         lcd.clear();
+        
         if(CurrentDiagnostic==ANALOG && AnalogStateStatus==6){
             AnalogStateStatus=1;
             CurrentDiagnostic=DIGITAL;
@@ -164,7 +172,7 @@ void lcdPort::lcdRefresher()
 
     }
 
-    if((loopCounter % 10==0) && CurrentScreen == CANSCREEN && CurrentDiagnostic== CANDig){
+    if((loopCounter % 40==0) && CurrentScreen == CANSCREEN && CurrentDiagnostic== CANDig){
         lcd.clear();
 
     }

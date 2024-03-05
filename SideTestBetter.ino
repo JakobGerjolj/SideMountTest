@@ -26,11 +26,12 @@ void loop() {
 
 
 start=millis();
-myCAN.ProccessCAN();
+
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
-  myLCD.SetCurrentDiagnostis(CANDig);
   myLCD.WriteStatus(AOKDOK);
-  //myLCD.WriteStatus(SCAN); // mogoce premaknem kaseneje
+  myLCD.WriteStatus(SCAN); 
+ // myLCD.SetCurrentDiagnostis(CANDig);
+// mogoce premaknem kaseneje
 
 }else{
 
@@ -72,7 +73,7 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
       myLCD.WriteStatusWithValue(A3NA3V, AnalogPins::GetValueFromPin(AnalogPins::Get12PIN()));//5
     }
 
-  }else if(AnalogPins::isAllPinsOK()) {
+  }else if(AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG) {
     myLCD.WriteStatus(AOK);
     myLCD.SetCurrentDiagnostis(DIGITAL);
     }
@@ -93,7 +94,7 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
       myLCD.WriteStatus(D2ND2V);//3
     }
 
-  }else if(DigitalPins::isAllPinsOK()) {
+  }else if(DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL) {
     myLCD.SetCurrentDiagnostis(ANALOG);
     myLCD.WriteStatus(DOK);
     }
@@ -102,6 +103,7 @@ if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
 }
 
 if(myLCD.GetCurrentDiagnostic()==CANDig){
+  myCAN.ProccessCAN();
   myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed()); // also add counter to button presses
 
   if(myCAN.ReturnZERO()){
@@ -115,15 +117,29 @@ if(myLCD.GetCurrentDiagnostic()==CANDig){
 
 }
 
+  myLCD.SetLoopCounter(loopCount);
+  myLCD.lcdRefresher();
+  if(myLCD.GetCurrentDiagnostic()==CANDig){
+  myCAN.ProccessCAN();
+  myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed()); // also add counter to button presses
 
+  if(myCAN.ReturnZERO()){
+    myLED.turnONLEDZERO();
+
+  }
+  if(myCAN.ReturnNFC()){
+    myLED.turnONLEDNFC();
+
+  }
+
+}
+  myLED.LEDrefresher();
   end=millis();
   if((end-start)<60){
     delay(60-(end-start));
   }
   loopCount++;
-  myLCD.SetLoopCounter(loopCount);
-  myLCD.lcdRefresher();
-  myLED.LEDrefresher();
+
 
 }
 
