@@ -177,6 +177,8 @@ void lcdPort::lcdRefresher()
 
     }
     if(CurrentScreen==CANSCREEN && CurrentDiagnostic!=CANDig){
+        AnalogStateStatus=1;
+        DigitalStateStatus=1;
         CurrentDiagnostic=ANALOG;
         lcd.clear();
 
