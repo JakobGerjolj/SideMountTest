@@ -3,6 +3,7 @@
 
 class DigitalPins{
 public:
+    static void init();
     static bool is3_3OK();
     static bool is4OK();
     static bool isAllPinsOK();

@@ -1,6 +1,12 @@
 #pragma once
 #include "DigitalPins.h"
 
+void DigitalPins::init(){
+    pinMode(Pin3_3,INPUT);
+    pinMode(Pin_4, INPUT);
+
+}
+
 bool DigitalPins::is3_3OK()
 {
     if(digitalRead(Pin3_3)==HIGH){

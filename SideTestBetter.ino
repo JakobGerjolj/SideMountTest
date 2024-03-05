@@ -12,6 +12,7 @@ unsigned long loopCount=0;
 unsigned long start;
 unsigned long end;
 void setup() {
+  DigitalPins::init();
   myLCD.lcdInit();
   myLED.Init();
   myCAN.CANInit();

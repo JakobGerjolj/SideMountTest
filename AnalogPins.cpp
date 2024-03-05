@@ -1,12 +1,11 @@
 #include "AnalogPins.h"
 
 
-
-bool AnalogPins::is3_3OK(){
+bool AnalogPins::is3_3OK()
+{
     if(analogRead(Pin3_3) < Val3_3 + napaka && analogRead(Pin3_3)  > Val3_3 - napaka)
         return true;
     else return false;
-
 }
 
 bool AnalogPins::is5OK(){
