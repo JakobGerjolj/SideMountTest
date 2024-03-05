@@ -31,6 +31,7 @@ start=millis();
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
   myLCD.WriteStatus(AOKDOK);
   myLCD.WriteStatus(SCAN); 
+  
 }else{
 
   if(myLCD.GetCurrentDiagnostic()==CANDig){
