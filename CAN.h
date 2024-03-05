@@ -27,9 +27,9 @@ private:
     bool ZERO;
     char LastButtonPressed;
     bool NFC;
-    static const uint8_t TempID= 0x13;
-    static const uint8_t HALID= 0x11;
-    static const uint8_t TipkaID= 0x12;
-    static const uint8_t NFCID= 0x14;
+    static const uint8_t TempID=0x13;
+    static const uint8_t HALID=0x11;
+    static const uint8_t TipkaID=0x12;
+    static const uint8_t NFCID=0x14;
 
 };

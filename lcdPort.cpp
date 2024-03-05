@@ -164,7 +164,7 @@ void lcdPort::lcdRefresher()
 
     }
 
-    if(CurrentScreen == CANSCREEN && CurrentDiagnostic== CANDig){
+    if((loopCounter % 5==0) && CurrentScreen == CANSCREEN && CurrentDiagnostic== CANDig){
         lcd.clear();
 
     }
@@ -203,7 +203,6 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         lcd.print("A1 VALUE: ");
         lcd.print(y);
 
-
     }
 
     if(x==A2NA2V && CurrentScreen==NOSCREEN && LastScreen!=A2NA2V && AnalogStateStatus==4){
@@ -216,7 +215,6 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         lcd.print("A2 VALUE: ");
         lcd.print(y);
 
-
     }
 
         if(x==A3NA3V && CurrentScreen==NOSCREEN && LastScreen!=A3NA3V && AnalogStateStatus==5){
@@ -228,7 +226,6 @@ void lcdPort::WriteStatusWithValue(Cscreen x, float y)
         lcd.setCursor(0,1);
         lcd.print("A3 VALUE: ");
         lcd.print(y);
-
 
     }
 }
@@ -266,8 +263,6 @@ void lcdPort::WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char
     lcd.print(T2);
 
  }
-
-
 }
 
 void lcdPort::showData(const char *data)
@@ -286,11 +281,10 @@ void lcdPort::bothLines(String x, String y)
     lcd.setCursor(0,1);
     lcd.print(y);
 
-
 }
 
 void lcdPort::SetLoopCounter(unsigned long counter){
 
-
+loopCounter=counter;
 
 }

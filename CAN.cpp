@@ -43,6 +43,16 @@ void CAN::ProccessCAN()
 
             }
 
+            if(LastButtonPressed==CurrentButtonCounted){
+                countLastButtonPressed++;
+
+            }else {
+                CurrentButtonCounted=LastButtonPressed;
+                countLastButtonPressed=0+1;
+
+             }
+
+
         }
 
         if(canMsg.can_id == NFCID){
@@ -50,7 +60,7 @@ void CAN::ProccessCAN()
 
         }else NFC=false;
         
-
+      
 
     }
 
@@ -100,16 +110,6 @@ bool CAN::ReturnNFC()
 
 int CAN::ReturnLastButtonsPressed()
 {
-
-    if(LastButtonPressed==CurrentButtonCounted){
-        countLastButtonPressed++;
-
-    }else {
-        countLastButtonPressed=LastButtonPressed;
-        countLastButtonPressed=1;
-
-    }
-
-
-    return 0;
+    return countLastButtonPressed;
 }
+

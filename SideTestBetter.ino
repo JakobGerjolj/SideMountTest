@@ -114,10 +114,6 @@ if(myLCD.GetCurrentDiagnostic()==CANDig){
 }
 
 
-
-
-
-
 end=millis();
 if((end-start)<60){
 delay(60-(end-start));
