@@ -114,14 +114,14 @@ if(myLCD.GetCurrentDiagnostic()==CANDig){
 }
 
 
-end=millis();
-if((end-start)<60){
-delay(60-(end-start));
-}
-loopCount++;
-myLCD.SetLoopCounter(loopCount);
-myLCD.lcdRefresher();
-myLED.LEDrefresher();
+  end=millis();
+  if((end-start)<60){
+    delay(60-(end-start));
+  }
+  loopCount++;
+  myLCD.SetLoopCounter(loopCount);
+  myLCD.lcdRefresher();
+  myLED.LEDrefresher();
 
 }
 

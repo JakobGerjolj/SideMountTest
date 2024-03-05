@@ -1,6 +1,7 @@
 #include <SPI.h>
 #include <mcp2515.h>
 
+
 class CAN{
 public:
     CAN();
