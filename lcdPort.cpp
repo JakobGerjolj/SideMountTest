@@ -3,11 +3,11 @@
 
 lcdPort::lcdPort() : lcd(0x27,20,4)
 {
-CurrentScreen=NOSCREEN;
-LastScreen=NOSCREEN;
-AnalogStateStatus=1;
-DigitalStateStatus=1;
-CurrentDiagnostic=ANALOG;
+    CurrentScreen=NOSCREEN;
+    LastScreen=NOSCREEN;
+    AnalogStateStatus=1;
+    DigitalStateStatus=1;
+    CurrentDiagnostic=ANALOG;
 }
 
 void lcdPort::lcdInit()

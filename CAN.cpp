@@ -78,8 +78,7 @@ bool CAN::ReadCAN()
 }
 
 uint16_t CAN::ReturnTemp1()
-{
-    
+{    
     return T1;
 }
 
