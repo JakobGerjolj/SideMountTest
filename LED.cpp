@@ -20,12 +20,12 @@ void LED::turnONLEDZERO()
 
 void LED::LEDrefresher()
 {
-    if(millis()>=timer1+10){
+    if(millis()>=timer1+1000){
         digitalWrite(ledNFC,LOW);
 
     }
 
-    if(millis()>=timer2+1500){
+    if(millis()>=timer2+10){
         digitalWrite(ledZERO,LOW);
 
     }
