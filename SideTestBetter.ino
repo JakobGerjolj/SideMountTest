@@ -23,6 +23,8 @@ void setup() {
 
 
 void loop() {
+
+
 start=millis();
 myCAN.ProccessCAN();
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
