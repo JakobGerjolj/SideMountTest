@@ -164,7 +164,7 @@ void lcdPort::lcdRefresher()
 
     }
 
-    if(millis()%1500==0 && CurrentScreen == CANSCREEN && CurrentDiagnostic== CANDig){
+    if(CurrentScreen == CANSCREEN && CurrentDiagnostic== CANDig){
         lcd.clear();
 
     }
@@ -285,6 +285,12 @@ void lcdPort::bothLines(String x, String y)
     lcd.print(x);
     lcd.setCursor(0,1);
     lcd.print(y);
+
+
+}
+
+void lcdPort::SetLoopCounter(unsigned long counter){
+
 
 
 }

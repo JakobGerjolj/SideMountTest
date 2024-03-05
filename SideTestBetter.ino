@@ -8,6 +8,7 @@
 CAN myCAN;
 lcdPort myLCD;
 LED myLED;
+unsigned long loopCount=0;
 unsigned long start;
 unsigned long end;
 void setup() {
@@ -115,13 +116,17 @@ if(myLCD.GetCurrentDiagnostic()==CANDig){
 
 
 
-myLCD.lcdRefresher();
-myLED.LEDrefresher();
+
 
 end=millis();
 if((end-start)<60){
 delay(60-(end-start));
 }
+loopCount++;
+myLCD.SetLoopCounter(loopCount);
+myLCD.lcdRefresher();
+myLED.LEDrefresher();
+
 }
 
 
