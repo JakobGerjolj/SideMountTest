@@ -1,33 +1,32 @@
 #pragma once
 #include "AnalogPins.h"
 #include "DigitalPins.h"
-enum PinOK
-{
-    OK = 0,
-    NOT_OK = 1
-};
+#include <string.h>
 
-enum PinsEnum
+#include "PinHelpers.h"
+
+
+struct Pin
 {
-    pin4V_SW = 0,
-    pin3_3V_SW = 1,
-    pin5V_SW = 2,
-    pin12V = 3,
-    pin3_3V = 4,
-    pin4V = 5
+    String pinName;
+    float pinValue;
+    bool isOK{false};
 
 };
+
+
+
 
 
 class Pins
 {
 public:
     explicit Pins();
-    void testPins();
-    PinOK GetMapElement(int index);
-    float GetValuesElement(int index);
+    int testPins();
+    Pin* getFaultyPins();
+
     
 private:
-    PinOK m_pins[6];
-    float m_values[6];
+    int numberOfBadPins();
+    Pin m_pins[6];
 };

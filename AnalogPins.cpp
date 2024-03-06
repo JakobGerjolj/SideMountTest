@@ -1,11 +1,43 @@
 #include "AnalogPins.h"
 
+bool AnalogPins::getPinStatus(PinsEnum pins)
+{
+    bool result = false;
+
+    switch (pins)
+    {
+    case pin4V_SW:
+        result = is44OK();
+        break;
+    
+    case pin3_3V_SW:
+        result = is3_3OK();
+        break;
+
+    case pin5V_SW:
+        result = is5OK();
+        break;
+
+    case pin12V:
+        result = is12OK();
+        break;
+
+    default:
+        break;
+    }
+
+
+    return false;
+}
 
 bool AnalogPins::is3_3OK()
 {
-    if(analogRead(Pin3_3) < Val3_3 + napaka && analogRead(Pin3_3)  > Val3_3 - napaka)
+    if(analogRead(Pin3_3) < Val3_3 + napaka && analogRead(Pin3_3)  > Val3_3 - napaka){
         return true;
-    else return false;
+    }
+    else {
+        return false;
+    }
 }
 
 bool AnalogPins::is5OK(){
@@ -28,10 +60,31 @@ bool AnalogPins::is44OK(){
     else return false;
 }
 
-float AnalogPins::GetValueFromPin(int pin)
+float AnalogPins::GetValueFromPin(PinsEnum pin)
 {
 
-    return analogRead(pin) * (5.0 / 1023.0);
+
+    switch (pin)
+    {
+    case pin4V_SW:
+        return analogRead(Pin4) * (5.0 / 1023.0);
+        break;
+
+    case pin3_3V_SW:
+        return analogRead(Pin3_3) * (5.0 / 1023.0);
+        break;
+
+    case pin5V_SW:
+        return analogRead(Pin5) * (5.0 / 1023.0);
+        break;
+
+    case pin12V:
+        return analogRead(Pin12) * (5.0 / 1023.0);
+        break;
+    
+    default:
+        break;
+    }
 
 }
 

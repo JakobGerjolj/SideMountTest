@@ -277,7 +277,7 @@ void lcdPort::WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char
 void lcdPort::WriteNOTOK(int pin, Cscreen scr, float y, int cou)
 {
 
-    if(scr==XNOT_OK_X_VALUE && CurrentScreen==NOSCREEN && cou<lastcou){
+    if(scr==XNOT_OK_X_VALUE && CurrentScreen==NOSCREEN && cou!=lastcou){
         lcd.clear();
         lastcou=cou;
         CurrentScreen=XNOT_OK_X_VALUE;

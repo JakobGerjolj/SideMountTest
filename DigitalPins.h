@@ -1,11 +1,14 @@
 #pragma once
 #include <Arduino.h>
+#include "PinHelpers.h"
+
 
 class DigitalPins{
 public:
     static void init();
     static bool is3_3OK();
     static bool is4OK();
+    static bool isPinOk(PinsEnum pins);
     static bool isAllPinsOK();
 
 private:
