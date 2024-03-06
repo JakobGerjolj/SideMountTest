@@ -24,7 +24,10 @@ class Pins
 public:
     explicit Pins();
     void testPins();
-
+    PinOK GetMapElement(int index);
+    float GetValuesElement(int index);
+    
 private:
     PinOK m_pins[6];
+    float m_values[6];
 };

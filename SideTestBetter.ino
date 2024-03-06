@@ -3,14 +3,18 @@
 #include "CAN.h"
 #include "lcdPort.h"
 #include "LED.h"
+#include "Pins.hpp"
 
 
 CAN myCAN;
 lcdPort myLCD;
 LED myLED;
+Pins pins;
+
 unsigned long loopCount=0;
 unsigned long start;
 unsigned long end;
+
 void setup() {
   DigitalPins::init();
   myLCD.lcdInit();
@@ -25,78 +29,88 @@ void setup() {
 
 void loop() {
 
+pins.testPins();
 
 start=millis();
 
 if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
-  myLCD.WriteStatus(AOKDOK);
+  //myLCD.WriteStatus(AOKDOK);
   myLCD.WriteStatus(SCAN); 
   
 }else{
 
-  if(myLCD.GetCurrentDiagnostic()==CANDig){
-    myLCD.SetCurrentDiagnostis(ANALOG);
+for(int x=0;x<6;x++){
+
+  if(pins.GetMapElement(x)==NOT_OK){
+    myLCD.WriteNOTOK(x,XNOT_OK_X_VALUE, pins.GetValuesElement(x), x);
 
   }
+}
 
-  if(!AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG){
+
+  // if(myLCD.GetCurrentDiagnostic()==CANDig){
+  //   myLCD.SetCurrentDiagnostis(ANALOG);
+
+  // }
+
+  // if(!AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG){
     
-    myLCD.WriteStatus(ANOTOK);
-    if(AnalogPins::is44OK()){
-      myLCD.WriteStatus(A0OK);
+  //   myLCD.WriteStatus(ANOTOK);
+  //   if(AnalogPins::is44OK()){
+  //     myLCD.WriteStatus(A0OK);
 
-    }else {
-      myLCD.WriteStatusWithValue(A0NA0V, AnalogPins::GetValueFromPin(AnalogPins::Get44PIN()));
+  //   }else {
+  //     myLCD.WriteStatusWithValue(A0NA0V, AnalogPins::GetValueFromPin(AnalogPins::Get44PIN()));
 
-    }
+  //   }
 
-    if(AnalogPins::is3_3OK()){
-      myLCD.WriteStatus(A1OK);
+  //   if(AnalogPins::is3_3OK()){
+  //     myLCD.WriteStatus(A1OK);
 
-    }else{
-      myLCD.WriteStatusWithValue(A1NA1V, AnalogPins::GetValueFromPin(AnalogPins::Get3_3PIN()));
+  //   }else{
+  //     myLCD.WriteStatusWithValue(A1NA1V, AnalogPins::GetValueFromPin(AnalogPins::Get3_3PIN()));
 
-    }
+  //   }
 
-    if(AnalogPins::is5OK()){
-      myLCD.WriteStatus(A2OK);
+  //   if(AnalogPins::is5OK()){
+  //     myLCD.WriteStatus(A2OK);
 
-    }else {
-      myLCD.WriteStatusWithValue(A2NA2V, AnalogPins::GetValueFromPin(AnalogPins::Get5PIN()));
+  //   }else {
+  //     myLCD.WriteStatusWithValue(A2NA2V, AnalogPins::GetValueFromPin(AnalogPins::Get5PIN()));
 
-    }
+  //   }
 
-    if(AnalogPins::is12OK()){
-      myLCD.WriteStatus(A3OK);
-    }else{
-      myLCD.WriteStatusWithValue(A3NA3V, AnalogPins::GetValueFromPin(AnalogPins::Get12PIN()));
-    }
+  //   if(AnalogPins::is12OK()){
+  //     myLCD.WriteStatus(A3OK);
+  //   }else{
+  //     myLCD.WriteStatusWithValue(A3NA3V, AnalogPins::GetValueFromPin(AnalogPins::Get12PIN()));
+  //   }
 
-  }else if(AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG) {
-    myLCD.WriteStatus(AOK);
-    myLCD.SetCurrentDiagnostis(DIGITAL);
-    }
+  // }else if(AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG) {
+  //   myLCD.WriteStatus(AOK);
+  //   myLCD.SetCurrentDiagnostis(DIGITAL);
+  //   }
   
-   if(!DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL){ 
-    myLCD.WriteStatus(DNOK); 
-    if(DigitalPins::is3_3OK()){
-      myLCD.WriteStatus(D1OK);
+  //  if(!DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL){ 
+  //   myLCD.WriteStatus(DNOK); 
+  //   if(DigitalPins::is3_3OK()){
+  //     myLCD.WriteStatus(D1OK);
 
-    }else {
-      myLCD.WriteStatus(D1ND1V); 
+  //   }else {
+  //     myLCD.WriteStatus(D1ND1V); 
 
-    }
+  //   }
 
-    if(DigitalPins::is4OK()){
-      myLCD.WriteStatus(D2OK);
-    }else {
-      myLCD.WriteStatus(D2ND2V);
-    }
+  //   if(DigitalPins::is4OK()){
+  //     myLCD.WriteStatus(D2OK);
+  //   }else {
+  //     myLCD.WriteStatus(D2ND2V);
+  //   }
 
-  }else if(DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL) {
-    myLCD.SetCurrentDiagnostis(ANALOG);
-    myLCD.WriteStatus(DOK);
-    }
+  // }else if(DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL) {
+  //   myLCD.SetCurrentDiagnostis(ANALOG);
+  //   myLCD.WriteStatus(DOK);
+  //   }
   
 
 }

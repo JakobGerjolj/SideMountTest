@@ -20,7 +20,6 @@ void lcdPort::lcdInit()
 void lcdPort::WriteStatus(Cscreen x)
 {
     
-
     if(x==AOKDOK && CurrentScreen==NOSCREEN && LastScreen!=AOKDOK){
         lcd.clear();    
         bothLines("ANALOG OK", "DIGITAL OK");
@@ -273,6 +272,28 @@ void lcdPort::WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char
     lcd.print(T2);
 
  }
+}
+
+void lcdPort::WriteNOTOK(int pin, Cscreen scr, float y, int cou)
+{
+
+    if(scr==XNOT_OK_X_VALUE && CurrentScreen==NOSCREEN && cou<lastcou){
+        lcd.clear();
+        lastcou=cou;
+        CurrentScreen=XNOT_OK_X_VALUE;
+        timer1=millis();
+        lcd.setCursor(0,0);
+        lcd.print(pin);
+        lcd.setCursor(2,0);
+        lcd.print("NOT OKAY");
+        lcd.setCursor(0,1);
+        lcd.print(pin);
+        lcd.setCursor(2,1);
+        lcd.print(" VALUE: ");
+        lcd.setCursor(11,1);
+        lcd.print(y);
+
+    }
 }
 
 void lcdPort::showData(const char *data)

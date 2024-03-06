@@ -16,7 +16,7 @@ public:
     StateOfDiagnostic GetCurrentDiagnostic();
     void SetLoopCounter(unsigned long counter);
     void WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char tipka, int counter);
-
+    void WriteNOTOK(int pin, Cscreen scr, float y, int cou);
     
 
 private:
@@ -31,5 +31,6 @@ private:
     unsigned long loopCounter;
     void showData(const char* data) override;
     void bothLines(String  x, String y);
+    int lastcou=200;
 
 };

@@ -34,6 +34,7 @@ enum Cscreen{
     AOK,
     DOK,
     NOSCREEN,
-    CANSCREEN
+    CANSCREEN,
+    XNOT_OK_X_VALUE
 
 };
