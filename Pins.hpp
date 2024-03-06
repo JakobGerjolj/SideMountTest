@@ -23,7 +23,7 @@ class Pins
 public:
     explicit Pins();
     int testPins();
-    Pin* getFaultyPins();
+    void getFaultyPins(Pin * arrPin);
 
     
 private:

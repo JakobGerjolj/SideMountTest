@@ -38,8 +38,8 @@ auto allPinsOK = pins.testPins();
 //Serial.println(allPinsOK);
 if(allPinsOK != 0)
 {
- 
-  auto faultyPins = pins.getFaultyPins();
+ Pin faultyPins[allPinsOK];
+  pins.getFaultyPins(faultyPins);
 
   if(faultyPins==nullptr){
     Serial.println("I am null");

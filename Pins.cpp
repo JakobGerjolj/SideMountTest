@@ -100,22 +100,23 @@ int Pins::testPins()
     // }
 }
 
-Pin* Pins::getFaultyPins()
+void Pins::getFaultyPins(Pin * arrPin)
 {
 
-    Pin temp[numberOfBadPins()];
+   // Pin temp[numberOfBadPins()];
     int tempIndex = 0;
     for (int x = 0; x < 6; x++)
     {
 
         if (m_pins[x].isOK == false)
         {
-            temp[tempIndex] = m_pins[x];
+            arrPin[tempIndex] = m_pins[x];
+           // temp[tempIndex] = m_pins[x];
             tempIndex++;
         }
     }
 
-    return temp;
+    
 }
 
 int Pins::numberOfBadPins()
