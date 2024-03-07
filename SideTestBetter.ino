@@ -15,6 +15,8 @@ unsigned long loopCount = 0;
 unsigned long start;
 unsigned long end;
 
+
+
 void setup()
 {
   DigitalPins::init();
@@ -26,45 +28,44 @@ void setup()
 
 void loop()
 {
-  // Serial.print("LOOPONJA");
-
+  start=millis();
   auto allPinsOK = pins.testPins();
+ 
 
-  Serial.println(allPinsOK);
-  delay(1000);
-  // Serial.println(allPinsOK);
   if (allPinsOK != 0)
   {
     Pin faultyPins[allPinsOK];
-
-    Serial.println("SOME PINS NOT OK STARTING TEST!");
     pins.getFaultyPins(faultyPins);
 
-    if (faultyPins == nullptr)
-    {
-      Serial.println("I am null");
-      delay(500);
+
+    for(int i=0;i< (sizeof(faultyPins) / sizeof(faultyPins[0]));i++){
+      Serial.println("IN LOOP");
+      Serial.print(i);
+      delay(300);
+
+      myLCD.WriteNOTOK(faultyPins[i].pinName, XNOT_OK_X_VALUE, faultyPins[i].pinValue, i, (sizeof(faultyPins) / sizeof(faultyPins[0])));
+
+      
     }
-    else
-      Serial.println("I am not null PTR");
+
+    
+    //tukaj izpisemo vse ki so slabe na lcd in jih tudi loopamo dokler niso vredu ko so vredu -> CAN
+
     //  Serial.println(faultyPins[0].pinName);
-    for (int x = 0; x < (sizeof(faultyPins) / sizeof(faultyPins[0])); x++)
-    {
-      Serial.println("---------------------------------------------");
-      Serial.print("Pin name:");
-      Serial.println(faultyPins[x].pinName);
-      Serial.print("Pin boolean:");
-      Serial.println(faultyPins[x].isOK);
-      Serial.print("Pin value: ");
-      Serial.println(faultyPins[x].pinValue);
-      Serial.println("---------------------------------------------");
-      delay(2000);
-    }
-  }else {
-    Serial.println("ALL pins are ok, PLEASE ");
-    delay(1000);
+    // for (int x = 0; x < (sizeof(faultyPins) / sizeof(faultyPins[0])); x++)
+    // {
+    //   Serial.println("---------------------------------------------");
+    //   Serial.print("Pin name:");
+    //   Serial.println(faultyPins[x].pinName);
+    //   Serial.print("Pin boolean:");
+    //   Serial.println(faultyPins[x].isOK);
+    //   Serial.print("Pin value: ");
+    //   Serial.println(faultyPins[x].pinValue);
+    //   Serial.println("---------------------------------------------");
+    //   delay(2000);
+    // }
   }
-  // start=millis();
+ 
   // Pin Temp;
   // if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
   //   //myLCD.WriteStatus(AOKDOK);
@@ -154,7 +155,7 @@ void loop()
   // }
 
   //   myLCD.SetLoopCounter(loopCount);
-  //   myLCD.lcdRefresher();
+    myLCD.lcdRefresher();
   //   if(myLCD.GetCurrentDiagnostic()==CANDig){
   //   myCAN.ProccessCAN();
   //   myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed());
@@ -169,12 +170,11 @@ void loop()
   //   }
 
   // }
-  //   myLED.LEDrefresher();
-  //   end=millis();
-  //   if((end-start)<60){
-  //     delay(60-(end-start));
-  //   }
-  //   loopCount++;
+    myLED.LEDrefresher();
+    end=millis();
+    if((end-start)<60){
+      delay(60-(end-start));
+    }
+    loopCount++;
 
-  delay(1000);
 }

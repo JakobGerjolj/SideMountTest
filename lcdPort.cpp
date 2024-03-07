@@ -7,6 +7,7 @@ lcdPort::lcdPort() : lcd(0x27,20,4)
     LastScreen=NOSCREEN;
     AnalogStateStatus=1;
     DigitalStateStatus=1;
+    lastcou=-1;
     CurrentDiagnostic=ANALOG;
 }
 
@@ -150,6 +151,8 @@ void lcdPort::lcdRefresher()
             
         }
 
+
+
     if(millis() >= (timer1 + 2000) && CurrentScreen != NOSCREEN && CurrentDiagnostic!=CANDig){
         lcd.clear();
         
@@ -274,18 +277,21 @@ void lcdPort::WriteCAN(Cscreen Scr, uint16_t HAL, uint16_t T1, uint16_t T2, char
  }
 }
 
-void lcdPort::WriteNOTOK(int pin, Cscreen scr, float y, int cou)
+void lcdPort::WriteNOTOK(String pin, Cscreen scr, float y, int cou, int size)
 {
 
-    if(scr==XNOT_OK_X_VALUE && CurrentScreen==NOSCREEN && cou!=lastcou){
+    Serial.println("CMON MAN");
+    if(scr==XNOT_OK_X_VALUE && CurrentScreen==NOSCREEN && cou!=lastcou && cou>lastcou){
         lcd.clear();
+        
         lastcou=cou;
+        if((size - 1)==lastcou) lastcou=-1;
         CurrentScreen=XNOT_OK_X_VALUE;
         timer1=millis();
         lcd.setCursor(0,0);
         lcd.print(pin);
-        lcd.setCursor(2,0);
-        lcd.print("NOT OKAY");
+        //lcd.setCursor(13,0);
+        lcd.print("  NOK");
         lcd.setCursor(0,1);
         lcd.print(pin);
         lcd.setCursor(2,1);
