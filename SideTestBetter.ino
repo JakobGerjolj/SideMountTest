@@ -14,7 +14,9 @@ Pins pins;
 unsigned long loopCount = 0;
 unsigned long start;
 unsigned long end;
+int arrayCounter=0;
 
+int last100AVG[10];
 
 
 void setup()
@@ -26,155 +28,90 @@ void setup()
   Serial.begin(115200);
 }
 
+
+int calculateAverage(int array[], int size) {
+  int sum = 0;
+
+  for (int i = 0; i < size; ++i) {
+    sum += array[i];
+  }
+
+  return sum/size;
+
+}
+
 void loop()
 {
-  start=millis();
+  
+  
+  start = millis();
   auto allPinsOK = pins.testPins();
- 
 
-  if (allPinsOK != 0)
+  Serial.println(allPinsOK);
+
+Serial.println("AVERAGE: ");
+Serial.println(calculateAverage(last100AVG, 10));
+
+  last100AVG[arrayCounter]=allPinsOK;
+  arrayCounter++;
+
+  if(arrayCounter%10==0){
+    arrayCounter=0;
+
+  }
+  if (allPinsOK != 0 && calculateAverage(last100AVG, 10)>=1)
   {
+    myLCD.SetCurrentDiagnostis(ANALOG);
     Pin faultyPins[allPinsOK];
     pins.getFaultyPins(faultyPins);
 
-
-    for(int i=0;i< (sizeof(faultyPins) / sizeof(faultyPins[0]));i++){
-      Serial.println("IN LOOP");
-      Serial.print(i);
-      delay(300);
+    for (int i = 0; i < (sizeof(faultyPins) / sizeof(faultyPins[0])); i++)
+    {
 
       myLCD.WriteNOTOK(faultyPins[i].pinName, XNOT_OK_X_VALUE, faultyPins[i].pinValue, i, (sizeof(faultyPins) / sizeof(faultyPins[0])));
-
-      
     }
-
-    
-    //tukaj izpisemo vse ki so slabe na lcd in jih tudi loopamo dokler niso vredu ko so vredu -> CAN
-
-    //  Serial.println(faultyPins[0].pinName);
-    // for (int x = 0; x < (sizeof(faultyPins) / sizeof(faultyPins[0])); x++)
-    // {
-    //   Serial.println("---------------------------------------------");
-    //   Serial.print("Pin name:");
-    //   Serial.println(faultyPins[x].pinName);
-    //   Serial.print("Pin boolean:");
-    //   Serial.println(faultyPins[x].isOK);
-    //   Serial.print("Pin value: ");
-    //   Serial.println(faultyPins[x].pinValue);
-    //   Serial.println("---------------------------------------------");
-    //   delay(2000);
-    // }
   }
- 
-  // Pin Temp;
-  // if(AnalogPins::isAllPinsOK() && DigitalPins::isAllPinsOK()){
-  //   //myLCD.WriteStatus(AOKDOK);
-  //   myLCD.WriteStatus(SCAN);
+  else
+  {
+    myLCD.SetCurrentDiagnostis(CANDig);
+  }
 
-  // }else{
+  if (myLCD.GetCurrentDiagnostic() == CANDig)
+  {
+    myCAN.ProccessCAN();
+    myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed());
 
-  // if(myLCD.GetCurrentDiagnostic()==CANDig){
-  //   myLCD.SetCurrentDiagnostis(ANALOG);
-
-  // }
-
-  // if(!AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG){
-
-  //   myLCD.WriteStatus(ANOTOK);
-  //   if(AnalogPins::is44OK()){
-  //     myLCD.WriteStatus(A0OK);
-
-  //   }else {
-  //     myLCD.WriteStatusWithValue(A0NA0V, AnalogPins::GetValueFromPin(AnalogPins::Get44PIN()));
-
-  //   }
-
-  //   if(AnalogPins::is3_3OK()){
-  //     myLCD.WriteStatus(A1OK);
-
-  //   }else{
-  //     myLCD.WriteStatusWithValue(A1NA1V, AnalogPins::GetValueFromPin(AnalogPins::Get3_3PIN()));
-
-  //   }
-
-  //   if(AnalogPins::is5OK()){
-  //     myLCD.WriteStatus(A2OK);
-
-  //   }else {
-  //     myLCD.WriteStatusWithValue(A2NA2V, AnalogPins::GetValueFromPin(AnalogPins::Get5PIN()));
-
-  //   }
-
-  //   if(AnalogPins::is12OK()){
-  //     myLCD.WriteStatus(A3OK);
-  //   }else{
-  //     myLCD.WriteStatusWithValue(A3NA3V, AnalogPins::GetValueFromPin(AnalogPins::Get12PIN()));
-  //   }
-
-  // }else if(AnalogPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==ANALOG) {
-  //   myLCD.WriteStatus(AOK);
-  //   myLCD.SetCurrentDiagnostis(DIGITAL);
-  //   }
-
-  //  if(!DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL){
-  //   myLCD.WriteStatus(DNOK);
-  //   if(DigitalPins::is3_3OK()){
-  //     myLCD.WriteStatus(D1OK);
-
-  //   }else {
-  //     myLCD.WriteStatus(D1ND1V);
-
-  //   }
-
-  //   if(DigitalPins::is4OK()){
-  //     myLCD.WriteStatus(D2OK);
-  //   }else {
-  //     myLCD.WriteStatus(D2ND2V);
-  //   }
-
-  // }else if(DigitalPins::isAllPinsOK() && myLCD.GetCurrentDiagnostic()==DIGITAL) {
-  //   myLCD.SetCurrentDiagnostis(ANALOG);
-  //   myLCD.WriteStatus(DOK);
-  //   }
-
-  // }
-
-  // if(myLCD.GetCurrentDiagnostic()==CANDig){
-  //   myCAN.ProccessCAN();
-  //   myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed());
-
-  //   if(myCAN.ReturnZERO()){
-  //     myLED.turnONLEDZERO();
-
-  //   }
-  //   if(myCAN.ReturnNFC()){
-  //     myLED.turnONLEDNFC();
-
-  //   }
-
-  // }
-
-  //   myLCD.SetLoopCounter(loopCount);
-    myLCD.lcdRefresher();
-  //   if(myLCD.GetCurrentDiagnostic()==CANDig){
-  //   myCAN.ProccessCAN();
-  //   myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed());
-
-  //   if(myCAN.ReturnZERO()){
-  //     myLED.turnONLEDZERO();
-
-  //   }
-  //   if(myCAN.ReturnNFC()){
-  //     myLED.turnONLEDNFC();
-
-  //   }
-
-  // }
-    myLED.LEDrefresher();
-    end=millis();
-    if((end-start)<60){
-      delay(60-(end-start));
+    if (myCAN.ReturnZERO())
+    {
+      myLED.turnONLEDZERO();
     }
-    loopCount++;
+    if (myCAN.ReturnNFC())
+    {
+      myLED.turnONLEDNFC();
+    }
+  }
 
+  myLCD.SetLoopCounter(loopCount);
+  myLCD.lcdRefresher();
+  if (myLCD.GetCurrentDiagnostic() == CANDig)
+  {
+    myCAN.ProccessCAN();
+    myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed());
+
+    if (myCAN.ReturnZERO())
+    {
+      myLED.turnONLEDZERO();
+    }
+    if (myCAN.ReturnNFC())
+    {
+      myLED.turnONLEDNFC();
+    }
+  }
+  myLED.LEDrefresher();
+  end = millis();
+  if ((end - start) < 60)
+  {
+    delay(60 - (end - start));
+  }
+  loopCount++;
 }
