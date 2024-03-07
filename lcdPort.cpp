@@ -190,58 +190,6 @@ void lcdPort::lcdRefresher()
 
 }
 
-void lcdPort::WriteStatusWithValue(Cscreen x, float y)
-{
-
-    if(x==A0NA0V && CurrentScreen==NOSCREEN && LastScreen!=A0NA0V && AnalogStateStatus==2){
-        lcd.clear();
-        CurrentScreen=A0NA0V;
-        timer1=millis();
-        AnalogStateStatus++;
-        showData("44v(A0) NOT OKAY");
-        lcd.setCursor(0,1);
-        lcd.print("A0 VALUE: ");
-        lcd.print(y);
-
-    }
-
-     if(x==A1NA1V && CurrentScreen==NOSCREEN && LastScreen!=A1NA1V && AnalogStateStatus==3){
-        lcd.clear();
-        CurrentScreen=A1NA1V;
-        timer1=millis();
-         AnalogStateStatus++;
-        showData("33V(A1) NOT OKAY");
-        lcd.setCursor(0,1);
-        lcd.print("A1 VALUE: ");
-        lcd.print(y);
-
-    }
-
-    if(x==A2NA2V && CurrentScreen==NOSCREEN && LastScreen!=A2NA2V && AnalogStateStatus==4){
-        lcd.clear();
-        CurrentScreen=A2NA2V;
-        timer1=millis();
-         AnalogStateStatus++;
-        showData("5V(A2) NOT OKAY");
-        lcd.setCursor(0,1);
-        lcd.print("A2 VALUE: ");
-        lcd.print(y);
-
-    }
-
-        if(x==A3NA3V && CurrentScreen==NOSCREEN && LastScreen!=A3NA3V && AnalogStateStatus==5){
-        lcd.clear();
-        CurrentScreen=A3NA3V;
-        timer1=millis();
-        AnalogStateStatus++;
-        showData("12V(A3) NOT OKAY");
-        lcd.setCursor(0,1);
-        lcd.print("A3 VALUE: ");
-        lcd.print(y);
-
-    }
-}
-
 void lcdPort::SetCurrentDiagnostis(StateOfDiagnostic x)
 {
     CurrentDiagnostic=x;
@@ -291,7 +239,7 @@ void lcdPort::WriteNOTOK(String pin, Cscreen scr, float y, int cou, int size)
         lcd.print("  NOK");
         lcd.setCursor(0,1);
         lcd.print(pin);
-        lcd.setCursor(2,1);
+        lcd.setCursor(3,1);
         lcd.print(" VALUE: ");
         lcd.setCursor(11,1);
         lcd.print(y);

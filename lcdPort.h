@@ -11,7 +11,6 @@ public:
     void lcdInit();
     void WriteStatus(Cscreen x);
     void lcdRefresher();
-    void WriteStatusWithValue(Cscreen x, float y);
     void SetCurrentDiagnostis(StateOfDiagnostic x);
     StateOfDiagnostic GetCurrentDiagnostic();
     void SetLoopCounter(unsigned long counter);

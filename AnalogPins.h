@@ -23,7 +23,7 @@ private:
     static const uint16_t Val12 = 225;    
     static const uint16_t Val44 = 954; 
     static const uint16_t napaka = 41; 
-     static const int Pin4= A0;
+    static const int Pin4= A0;
     static const int Pin3_3= A1;
     static const int Pin5= A2;
     static const int Pin12= A3;
