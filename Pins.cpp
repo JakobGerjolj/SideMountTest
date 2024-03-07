@@ -42,62 +42,6 @@ int Pins::testPins()
 
     return faultyPins;
 
-    // if(AnalogPins::getPinStatus(pin4V_SW)){
-    //     m_pins[pin4V_SW].isOK = true;
-    //     m_pins[pin4V_SW].pinValue=AnalogPins::GetValueFromPin(AnalogPins::Get44PIN());
-
-    // }else{
-    //     m_pins[pin4V_SW].isOK= false;
-    //     m_pins[pin4V_SW].pinValue=AnalogPins::GetValueFromPin(AnalogPins::Get44PIN());
-    //     isAllOK = false;
-
-    // }
-
-    // if(AnalogPins::is3_3OK()){
-    //     m_pins[pin3_3V_SW].isOK=true;
-    //     m_pins[pin3_3V_SW].pinValue=AnalogPins::GetValueFromPin(AnalogPins::Get3_3PIN());
-
-    // }else{
-    //     isAllOK = false;
-    //     m_pins[pin3_3V_SW].isOK=false;
-    //     m_pins[pin3_3V_SW].pinValue=AnalogPins::GetValueFromPin(AnalogPins::Get3_3PIN());
-    // }
-    // if(AnalogPins::is5OK()){
-    //     m_pins[pin5V_SW].isOK=true;
-    //     m_pins[pin5V_SW].pinValue=AnalogPins::GetValueFromPin(AnalogPins::Get5PIN());
-
-    // }else{
-    //     isAllOK = false;
-    //     m_pins[pin5V_SW].isOK=false;
-    //     m_pins[pin5V_SW].pinValue=AnalogPins::GetValueFromPin(AnalogPins::Get5PIN());
-    // }
-    //  if(AnalogPins::is12OK()){
-    //     m_pins[pin12V].isOK=true;
-    //     m_pins[pin12V].pinValue=AnalogPins::GetValueFromPin(AnalogPins::Get12PIN());
-    // }else{
-    //     isAllOK = false;
-    //     m_pins[pin12V].isOK=false;
-    //     m_pins[pin12V].pinValue=AnalogPins::GetValueFromPin(AnalogPins::Get12PIN());
-    // }
-    // if(DigitalPins::is3_3OK()){
-    //     m_pins[pin3_3V].isOK=true;
-    //     m_pins[pin3_3V].pinValue=5;
-
-    // }else {
-    //     isAllOK = false;
-    //     m_pins[pin3_3V].isOK=false;
-    //     m_pins[pin3_3V].pinValue=0;
-    // }
-
-    // if(DigitalPins::is4OK()){
-    //     m_pins[pin4V].isOK=true;
-    //     m_pins[pin4V].pinValue = 5;
-    // }else {
-    //     isAllOK = false;
-    //     m_pins[pin4V].isOK=false;
-    //     m_pins[pin4V].pinValue=0;
-
-    // }
 }
 
 void Pins::getFaultyPins(Pin * arrPin)

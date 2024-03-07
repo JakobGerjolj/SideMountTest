@@ -27,7 +27,7 @@ bool AnalogPins::getPinStatus(PinsEnum pins)
     }
 
 
-    return false;
+    return result;
 }
 
 bool AnalogPins::is3_3OK()
