@@ -63,6 +63,12 @@ void Pins::getFaultyPins(Pin * arrPin)
     
 }
 
+Pin* Pins::getAllPins()
+{
+    return m_pins;
+
+}
+
 int Pins::numberOfBadPins()
 {
     int temp = 0;

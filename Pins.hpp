@@ -24,7 +24,7 @@ public:
     explicit Pins();
     int testPins();
     void getFaultyPins(Pin * arrPin);
-
+    Pin* getAllPins();
     
 private:
     int numberOfBadPins();

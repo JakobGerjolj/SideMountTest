@@ -42,6 +42,7 @@ int calculateAverage(int array[], int size)
 void loop()
 {
 
+
   start = millis();
   auto allPinsOK = pins.testPins();
 
@@ -100,4 +101,9 @@ void loop()
     delay(60 - (end - start));
   }
   loopCount++;
+
+  if(loopCount==1000000){
+    loopCount=0;
+
+  }
 }
