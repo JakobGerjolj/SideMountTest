@@ -42,7 +42,7 @@ int calculateAverage(int array[], int size)
 void loop()
 {
 
-
+  
   start = millis();
   auto allPinsOK = pins.testPins();
 
