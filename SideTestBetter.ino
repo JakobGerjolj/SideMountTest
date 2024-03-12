@@ -11,7 +11,7 @@ CAN myCAN;
 lcdPort myLCD;
 LED myLED;
 Pins pins;
-SerialStatus mySeriStati;
+SerialStatus dataSender;
 
 unsigned long loopCount = 0;
 unsigned long start;
@@ -50,7 +50,7 @@ void loop()
   auto allPinsOK = pins.testPins();
 
 
-  mySeriStati.getPinsValue(pins.getAllPins());
+  dataSender.getPinsValue(pins.getAllPins());
   last100AVG[arrayCounter] = allPinsOK;
   arrayCounter++;
 
@@ -81,6 +81,8 @@ void loop()
   {
     myCAN.ProccessCAN();
     myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed());
+    dataSender.getCANValue(myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed(), myCAN.ReturnNFC(), myCAN.ReturnHAL(), myCAN.ReturnZERO(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2());
+
 
     if (myCAN.ReturnZERO())
     {
@@ -107,8 +109,8 @@ void loop()
 
   }
 
-   if(loopCount%40==0){
-    mySeriStati.sendToQt();    
+   if(loopCount%10==0){
+    dataSender.sendToQt();    
 
   }
 

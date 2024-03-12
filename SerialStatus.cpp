@@ -26,7 +26,7 @@ void SerialStatus::getPinsValue(Pin *pins1)
 
 }
 
-void SerialStatus::getCANValue(char lButt, int cButt, bool n, uint16_t H, bool z)
+void SerialStatus::getCANValue(char lButt, int cButt, bool n, uint16_t H, bool z, uint16_t T1, uint16_t T2)
 {
 
 lastButton=lButt;
@@ -34,7 +34,8 @@ counterButton=cButt;
 nfc=n;
 HAL=H;
 zero=z;
-
+m_T1=T1;
+m_T2=T2;
 }
 
 void SerialStatus::sendToQt()
@@ -68,6 +69,10 @@ void SerialStatus::sendToQt()
         Serial.print(HAL);
         Serial.print(",");
         Serial.print(zero);
+        Serial.print(",");
+        Serial.print(m_T1);
+        Serial.print(",");
+        Serial.print(m_T2);
         Serial.println(">");
 
 
