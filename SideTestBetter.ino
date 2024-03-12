@@ -5,11 +5,13 @@
 #include "LED.h"
 #include "Pins.hpp"
 #include "PinHelpers.h"
+#include "SerialStatus.hpp"
 
 CAN myCAN;
 lcdPort myLCD;
 LED myLED;
 Pins pins;
+SerialStatus mySeriStati;
 
 unsigned long loopCount = 0;
 unsigned long start;
@@ -42,15 +44,13 @@ int calculateAverage(int array[], int size)
 void loop()
 {
 
+ 
   
   start = millis();
   auto allPinsOK = pins.testPins();
 
-  Serial.println(allPinsOK);
 
-  Serial.println("AVERAGE: ");
-  Serial.println(calculateAverage(last100AVG, 10));
-
+  mySeriStati.getPinsValue(pins.getAllPins());
   last100AVG[arrayCounter] = allPinsOK;
   arrayCounter++;
 
@@ -106,4 +106,11 @@ void loop()
     loopCount=0;
 
   }
+
+   if(loopCount%40==0){
+    mySeriStati.sendToQt();    
+
+  }
+
+
 }
