@@ -57,7 +57,7 @@ void SerialStatus::sendToQt()
         Serial.print(",");
         }
         Serial.println(">");
-  
+
 
     }else{
         Serial.print("<1,");
