@@ -16,6 +16,37 @@ SerialStatus::SerialStatus()
 
 }
 
+void SerialStatus::receiveSerial()
+{
+    if(Serial.available()>0){
+    incomingByte=Serial.read();
+
+
+    }
+
+    if((char)incomingByte=='<') {
+      areWeIn=true;
+      currentBufferIndex=-1;
+    }
+
+    if((char)incomingByte=='>') {
+      areWeIn=false;
+      currentBufferIndex=0;
+     // Serial.println(buffer);
+    }
+
+    if(areWeIn){
+      if(currentBufferIndex!=-1){
+      buffer[currentBufferIndex]=(char)incomingByte;
+       currentBufferIndex++;
+      }else currentBufferIndex++;
+
+    }
+
+
+
+}
+
 void SerialStatus::getPinsValue(Pin *pins1)
 {
 

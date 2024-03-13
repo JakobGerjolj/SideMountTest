@@ -44,8 +44,8 @@ int calculateAverage(int array[], int size)
 void loop()
 {
 
- 
-  
+  dataSender.receiveSerial();
+
   start = millis();
   auto allPinsOK = pins.testPins();
 

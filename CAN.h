@@ -17,6 +17,7 @@ public:
     
 
 private:
+    void SendCAN(can_frame canFrame);
     bool ReadCAN();
     MCP2515 mcp;
     struct can_frame canMsg;
@@ -32,5 +33,6 @@ private:
     static const uint8_t HALID=0x11;
     static const uint8_t TipkaID=0x12;
     static const uint8_t NFCID=0x14;
+    static const uint8_t CANID=0x15;
 
 };

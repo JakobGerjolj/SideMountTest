@@ -22,6 +22,13 @@ void CAN::CANInit()
 void CAN::ProccessCAN()
 {
     if(ReadCAN()){
+
+        if(canMsg.can_id==CANID){
+                //printamo confirmation
+                //ce dobimo <sendCAN> preko serialReada posljemo
+
+        }
+
         if(canMsg.can_id == TempID){
             T1=(uint16_t)((canMsg.data[1] << 8) | canMsg.data[0]);
             T2=(uint16_t)((canMsg.data[3] << 8) | canMsg.data[2]);
@@ -63,6 +70,14 @@ void CAN::ProccessCAN()
       
 
     }
+
+}
+
+void CAN::SendCAN(can_frame canFrame)
+{
+
+mcp.sendMessage(&canFrame);
+
 
 }
 
