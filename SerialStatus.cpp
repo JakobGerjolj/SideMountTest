@@ -57,6 +57,7 @@ void SerialStatus::sendToQt()
         Serial.print(",");
         }
         Serial.println(">");
+  
 
     }else{
         Serial.print("<1,");
@@ -74,6 +75,7 @@ void SerialStatus::sendToQt()
         Serial.print(",");
         Serial.print(m_T2);
         Serial.println(">");
+
 
 
     }
