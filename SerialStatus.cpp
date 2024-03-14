@@ -84,8 +84,18 @@ void SerialStatus::sendToQt()
         Serial.print("<0,");
         for(int i=0;i<6;i++){
         Serial.print(pins[i].pinValue);
-        if(i!=5)
+        
         Serial.print(",");
+        }
+        
+        
+        for(int i=0;i<6;i++){
+            Serial.print(pins[i].isOK);
+            if(i!=5){
+                Serial.print(",");
+
+            }
+
         }
         Serial.println(">");
 
