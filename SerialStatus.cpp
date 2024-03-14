@@ -96,7 +96,7 @@ void SerialStatus::sendToQt()
         Serial.print(",");
         Serial.print(counterButton);
         Serial.print(",");
-        Serial.print(nfc);
+        Serial.print(nfc); //myb make it 1 for longer so it works better in Qt
         Serial.print(",");
         Serial.print(HAL);
         Serial.print(",");
