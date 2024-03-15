@@ -43,10 +43,12 @@ int calculateAverage(int array[], int size)
 
 void loop()
 {
+  start = millis();
 
   dataSender.receiveSerial();
-
-  start = millis();
+  myCAN.ProccessCAN();
+  dataSender.getCANValue(myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed(), myCAN.ReturnNFC(), myCAN.ReturnHAL(), myCAN.ReturnZERO(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2());
+ 
   auto allPinsOK = pins.testPins();
 
 
@@ -79,9 +81,9 @@ void loop()
 
   if (myLCD.GetCurrentDiagnostic() == CANDig)
   {
-    myCAN.ProccessCAN();
+    
     myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed());
-    dataSender.getCANValue(myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed(), myCAN.ReturnNFC(), myCAN.ReturnHAL(), myCAN.ReturnZERO(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2());
+    
 
 
     if (myCAN.ReturnZERO())
