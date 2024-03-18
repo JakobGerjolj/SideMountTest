@@ -18,6 +18,17 @@ SerialStatus::SerialStatus()
 
 void SerialStatus::receiveSerial()
 {
+
+char comp[4]="LED";
+
+if(strcmp(buffer,"LED")==0) { //?
+        didWeGetSignal=true;
+        Serial.print("INSIDESSSS");
+      }
+      Serial.println(didWeGetSignal);
+      Serial.println(buffer);
+
+
     if(Serial.available()>0){
     incomingByte=Serial.read();
 
@@ -32,11 +43,7 @@ void SerialStatus::receiveSerial()
     if((char)incomingByte=='>') {
       areWeIn=false;
       currentBufferIndex=0;
-      if(buffer=="<LED>") {
-        didWeGetSignal=true;
-
-      }
-     // Serial.println(buffer);
+      
     }
 
     if(areWeIn){
@@ -163,5 +170,18 @@ void SerialStatus::sendToQt()
 
      bool SerialStatus::getReceived()
      {
-         return didWeGetSignal;
+        return didWeGetSignal;
+     }
+
+     void SerialStatus::setSignalFalse()
+     {
+        didWeGetSignal=false;
+     }
+
+     void SerialStatus::clearBuffer()
+     {
+        buffer[0]='x';
+        buffer[1]='x';
+        buffer[2]='x';
+
      }

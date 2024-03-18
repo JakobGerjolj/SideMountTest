@@ -13,11 +13,12 @@ public:
     void sendToQt();
     bool getReceived();
     void setSignalFalse();
+    void clearBuffer();
 
 
 private:
     int incomingByte;
-    char buffer[10];
+    char buffer[4];
     int currentBufferIndex=0;
     bool areWeIn=false; 
     char received[3];

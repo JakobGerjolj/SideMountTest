@@ -14,7 +14,7 @@ public:
     char ReturnLastButtonPressed();
     bool ReturnNFC();
     int  ReturnLastButtonsPressed();
-    
+    void sendLEDSignal();
 
 private:
     struct can_frame ledMsg;

@@ -86,7 +86,8 @@ void loop()
     if(dataSender.getReceived()){
       Serial.println("GOT LED SIGNAL");
       myCAN.sendLEDSignal();
-
+      dataSender.setSignalFalse();
+      dataSender.clearBuffer();
     }
 
 
