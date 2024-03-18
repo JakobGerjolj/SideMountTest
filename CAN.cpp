@@ -14,6 +14,9 @@ LastButtonPressed='X';
 
 void CAN::CANInit()
 {
+    ledMsg.can_id = 0x15;
+    ledMsg.can_dlc = 1;
+    ledMsg.data[0]= 0x01;
     mcp.reset();
     mcp.setBitrate(CAN_250KBPS, MCP_8MHZ);
     mcp.setNormalMode();
@@ -127,3 +130,7 @@ int CAN::ReturnLastButtonsPressed()
     return countLastButtonPressed;
 }
 
+void CAN::sendLEDSignal()
+{
+    SendCAN(ledMsg);
+}

@@ -11,6 +11,8 @@ public:
     void getPinsValue(Pin* pins);
     void getCANValue(char lButt, int cButt, bool n, uint16_t H, bool z, uint16_t T1, uint16_t T2);
     void sendToQt();
+    bool getReceived();
+    void setSignalFalse();
 
 
 private:
@@ -27,5 +29,6 @@ private:
     bool zero;
     uint16_t m_T1;
     uint16_t m_T2;
+    bool didWeGetSignal;
 
 };

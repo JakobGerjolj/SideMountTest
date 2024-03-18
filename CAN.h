@@ -17,6 +17,7 @@ public:
     
 
 private:
+    struct can_frame ledMsg;
     void SendCAN(can_frame canFrame);
     bool ReadCAN();
     MCP2515 mcp;

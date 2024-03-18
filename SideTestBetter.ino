@@ -83,7 +83,11 @@ void loop()
   {
     
     myLCD.WriteCAN(CANSCREEN, myCAN.ReturnHAL(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed());
-    
+    if(dataSender.getReceived()){
+      Serial.println("GOT LED SIGNAL");
+      myCAN.sendLEDSignal();
+
+    }
 
 
     if (myCAN.ReturnZERO())

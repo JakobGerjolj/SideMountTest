@@ -32,6 +32,10 @@ void SerialStatus::receiveSerial()
     if((char)incomingByte=='>') {
       areWeIn=false;
       currentBufferIndex=0;
+      if(buffer=="<LED>") {
+        didWeGetSignal=true;
+
+      }
      // Serial.println(buffer);
     }
 
@@ -157,5 +161,7 @@ void SerialStatus::sendToQt()
 
      }
 
-
-
+     bool SerialStatus::getReceived()
+     {
+         return didWeGetSignal;
+     }
