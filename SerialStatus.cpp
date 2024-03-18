@@ -23,10 +23,10 @@ char comp[4]="LED";
 
 if(strcmp(buffer,"LED")==0) { //?
         didWeGetSignal=true;
-        Serial.print("INSIDESSSS");
+       // Serial.print("INSIDESSSS");
       }
-      Serial.println(didWeGetSignal);
-      Serial.println(buffer);
+    //  Serial.println(didWeGetSignal);
+    //  Serial.println(buffer);
 
 
     if(Serial.available()>0){
