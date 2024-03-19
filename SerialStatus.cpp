@@ -114,8 +114,8 @@ void SerialStatus::sendToQt()
     Serial.print(",");
     Serial.print(counterButton);
     Serial.print(",");
-    Serial.print(nfc);
-    Serial.print(",");
+    Serial.print(nfc); //Make nfc longer not just one packet
+    Serial.print(","); //So we avoid delay on QT
     Serial.print(HAL);
     Serial.print(",");
     Serial.print(zero);
