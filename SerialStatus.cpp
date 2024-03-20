@@ -73,7 +73,18 @@ void SerialStatus::getCANValue(char lButt, int cButt, bool n, uint16_t H, bool z
 
 lastButton=lButt;
 counterButton=cButt;
+
+if(prolongedNFC==false){
 nfc=n;
+}
+if(nfc==1 && prolongedNFC==false){
+    prolongedNFC=true;
+    timer1=millis();
+}
+if(prolongedNFC) {
+    nfc=true;
+}
+//nfc=n;
 HAL=H;
 zero=z;
 m_T1=T1;
@@ -184,4 +195,12 @@ void SerialStatus::sendToQt()
         buffer[1]='x';
         buffer[2]='x';
 
+     }
+
+     void SerialStatus::nfcTimer()
+     {
+        if(millis() > timer1 + 2000){
+            nfc=0;
+            prolongedNFC=false;
+        }
      }

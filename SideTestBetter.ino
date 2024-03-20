@@ -121,5 +121,6 @@ void loop()
 
   }
 
+  dataSender.nfcTimer();
 
 }

@@ -14,9 +14,13 @@ public:
     bool getReceived();
     void setSignalFalse();
     void clearBuffer();
+    void nfcTimer();
 
 
 private:
+    bool prolongedNFC;
+    unsigned long timer1;
+    int nfcContinous{0};
     int incomingByte;
     char buffer[4];
     int currentBufferIndex=0;
