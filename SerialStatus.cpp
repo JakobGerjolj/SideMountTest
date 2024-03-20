@@ -135,47 +135,6 @@ void SerialStatus::sendToQt()
     Serial.print(",");
     Serial.print(m_T2);
     Serial.println(">");
-    
-
-    // if(!good){
-
-    //     Serial.print("<0,");
-    //     for(int i=0;i<6;i++){
-    //     Serial.print(pins[i].pinValue);
-        
-    //     Serial.print(",");
-    //     }
-        
-        
-    //     for(int i=0;i<6;i++){
-    //         Serial.print(pins[i].isOK);
-    //         if(i!=5){
-    //             Serial.print(",");
-
-    //         }
-
-    //     }
-    //     Serial.println(">");
-
-
-    // }else{
-    //     Serial.print("<1,");
-    //     Serial.print(lastButton);
-    //     Serial.print(",");
-    //     Serial.print(counterButton);
-    //     Serial.print(",");
-    //     Serial.print(nfc); //myb make it 1 for longer so it works better in Qt
-    //     Serial.print(",");
-    //     Serial.print(HAL);
-    //     Serial.print(",");
-    //     Serial.print(zero);
-    //     Serial.print(",");
-    //     Serial.print(m_T1);
-    //     Serial.print(",");
-    //     Serial.print(m_T2);
-    //     Serial.println(">");
-
-
 
      }
 
