@@ -116,7 +116,7 @@ void loop()
 
   }
 
-   if(loopCount%10==0){
+   if(loopCount % 10 == 0){
     dataSender.sendToQt();    
 
   }

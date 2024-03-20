@@ -113,7 +113,7 @@ void SerialStatus::sendToQt()
     for(int i=0;i<6;i++){
         Serial.print(pins[i].pinValue);
         
-        Serial.print(",");
+        Serial.print("V,");
         }
 
     for(int i=0;i<6;i++){
