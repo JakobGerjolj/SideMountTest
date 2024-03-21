@@ -26,7 +26,8 @@ void CAN::ProccessCAN()
 {
     if(ReadCAN()){
 
-        if(canMsg.can_id==CANID){
+        if(canMsg.can_id==0x015 && canMsg.data[0]==0x02){
+            Serial.println("WE GOT RESPONSE!!!!");
                 //printamo confirmation
                 //ce dobimo <sendCAN> preko serialReada posljemo
 
