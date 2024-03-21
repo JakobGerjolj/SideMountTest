@@ -25,11 +25,15 @@ void CAN::CANInit()
 void CAN::ProccessCAN()
 {
     if(ReadCAN()){
-
+           // Serial.println(responseGotten);
         if(canMsg.can_id==0x015 && canMsg.data[0]==0x02){
-            Serial.println("WE GOT RESPONSE!!!!");
+           // Serial.println("WE GOT RESPONSE!!!!");
+            responseGotten=true;
                 //printamo confirmation
                 //ce dobimo <sendCAN> preko serialReada posljemo
+
+        }else {
+            responseGotten=false;
 
         }
 
@@ -134,4 +138,9 @@ int CAN::ReturnLastButtonsPressed()
 void CAN::sendLEDSignal()
 {
     SendCAN(ledMsg);
+}
+
+bool CAN::getResponseGotten()
+{
+    return responseGotten;
 }

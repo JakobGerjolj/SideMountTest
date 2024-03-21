@@ -15,8 +15,10 @@ public:
     bool ReturnNFC();
     int  ReturnLastButtonsPressed();
     void sendLEDSignal();
+    bool getResponseGotten();
 
 private:
+    bool responseGotten;
     struct can_frame ledMsg;
     void SendCAN(can_frame canFrame);
     bool ReadCAN();

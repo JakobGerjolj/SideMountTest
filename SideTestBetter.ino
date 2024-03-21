@@ -47,7 +47,7 @@ void loop()
 
   dataSender.receiveSerial();
   myCAN.ProccessCAN();
-  dataSender.getCANValue(myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed(), myCAN.ReturnNFC(), myCAN.ReturnHAL(), myCAN.ReturnZERO(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2());
+  dataSender.getCANValue(myCAN.ReturnLastButtonPressed(), myCAN.ReturnLastButtonsPressed(), myCAN.ReturnNFC(), myCAN.ReturnHAL(), myCAN.ReturnZERO(), myCAN.ReturnTemp1(), myCAN.ReturnTemp2(), myCAN.getResponseGotten());
  
   auto allPinsOK = pins.testPins();
 
@@ -117,7 +117,7 @@ void loop()
   }
 
    if(loopCount % 10 == 0){
-    dataSender.sendToQt();    
+    dataSender.sendToQt();
 
   }
 

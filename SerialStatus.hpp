@@ -9,7 +9,7 @@ public:
     SerialStatus();
     void receiveSerial();
     void getPinsValue(Pin* pins);
-    void getCANValue(char lButt, int cButt, bool n, uint16_t H, bool z, uint16_t T1, uint16_t T2);
+    void getCANValue(char lButt, int cButt, bool n, uint16_t H, bool z, uint16_t T1, uint16_t T2, bool);
     void sendToQt();
     bool getReceived();
     void setSignalFalse();
@@ -18,6 +18,7 @@ public:
 
 
 private:
+    bool responseGotten;
     bool prolongedNFC;
     unsigned long timer1;
     int nfcContinous{0};
